@@ -5,6 +5,7 @@ class OrdenEstadisticaService {
     list = () => instance.get('/API/ControladorOrdenesEstadisticas');
     create = (data) => instance.post('/API/ControladorOrdenesEstadisticas', data);
     update = (id, data) => instance.put(`/API/ControladorOrdenesEstadisticas/${id}`, data);
+    delete = (id) => instance.delete(`/API/ControladorOrdenesEstadisticas/${id}`);
 
 
 }

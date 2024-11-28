@@ -2,12 +2,32 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
+import OrdentEstadistica from '../../../service/OrdenEstadistica';
+import { alertSuccess } from '../../../utils/alert';
 
 
 function Delete({ order }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+
+
+
+    const onFinish = async () => {
+        try {
+
+            OrdentEstadistica.delete(order.id_Orden_Estadistica)
+                .then(res => {
+                    alertSuccess({ title: 'Solicitud cancelada', content: 'La orden estadistica ha sido cancelada correctamente' })
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <div>
@@ -33,7 +53,7 @@ function Delete({ order }) {
                     width={600}
                 >
                     <div className="flex items-center justify-center gap-2">
-                        <p>¿Estás seguro que deseas eliminar la orden <b>{order.Nombre}</b>?</p>
+                        <p>¿Estás seguro que deseas eliminar la orden <b>{order.id_Orden_Estadistica}</b>?</p>
                         <Button
                             className="px-2"
                             onClick={() => setModal(false)}
@@ -42,7 +62,7 @@ function Delete({ order }) {
                         </Button>
                         <Button
                             className="px-2"
-                            onClick={() => setModal(false)}
+                            onClick={() => onFinish()}
                         >
                             Eliminar
                         </Button>

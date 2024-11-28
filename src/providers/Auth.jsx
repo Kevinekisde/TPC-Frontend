@@ -58,7 +58,6 @@ const AuthProvider = ({ children }) => {
     }, [authIsSuccess])
 
 
-    console.log(loading);
 
     return (
         <AuthContext.Provider value={{ isSignedIn, setIsSignedIn, user, authIsSuccess }}>

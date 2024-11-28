@@ -2,22 +2,26 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
+import OrdentEstadistica from '../../../service/OrdenEstadistica';
 import { alertSuccess } from '../../../utils/alert';
-import CentroCosto from '../../../service/CentroCosto';
+import User from '../../../service/User';
 
 
-function Delete({ Ceco }) {
+function Delete({ user }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
 
+    console.log(user)
+
+
     const onFinish = async () => {
         try {
 
-            CentroCosto.delete(Ceco.id_Ceco)
+            User.delete(user.id_Usuario)
                 .then(res => {
-                    alertSuccess({ title: 'Solicitud cancelada', content: 'La solicitud ha sido cancelada correctamente' })
+                    alertSuccess({ title: 'Usuario cancelado', content: 'El usuario ha sido eliminado correctamente' })
                 })
                 .catch(error => {
                     console.error(error)
@@ -40,7 +44,7 @@ function Delete({ Ceco }) {
             {
                 modal && <Modal
                     open={modal}
-                    title="Eliminar Centro"
+                    title="Eliminar Usuario"
                     centered
                     zIndex={3000}
                     closable={true}
@@ -52,7 +56,7 @@ function Delete({ Ceco }) {
                     width={600}
                 >
                     <div className="flex items-center justify-center gap-2">
-                        <p>¿Estás seguro que deseas eliminar el <b>{Ceco.id_Ceco}</b>?</p>
+                        <p>¿Estás seguro que deseas eliminar el usuario <b>{user.id_Usuario}</b>?</p>
                         <Button
                             className="px-2"
                             onClick={() => setModal(false)}

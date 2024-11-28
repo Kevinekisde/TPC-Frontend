@@ -2,6 +2,8 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
+import Departamento from '../../../service/Departaments';
+import { alertSuccess } from '../../../utils/alert';
 
 
 function Delete({ departamento }) {
@@ -9,7 +11,21 @@ function Delete({ departamento }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
-    
+    const onFinish = async () => {
+        try {
+
+            Departamento.delete(departamento.id_Departamento)
+                .then(res => {
+                    alertSuccess({ title: 'Departamento cancelada', content: 'El departamento ha sido cancelado' })
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <div>
@@ -35,7 +51,7 @@ function Delete({ departamento }) {
                     width={600}
                 >
                     <div className="flex items-center justify-center gap-2">
-                        <p>¿Estás seguro que deseas eliminar el departamento <b>{departamento.Nombre}</b>?</p>
+                        <p>¿Estás seguro que deseas eliminar el departamento <b>{departamento.id_Departamento}</b>?</p>
                         <Button
                             className="px-2"
                             onClick={() => setModal(false)}
@@ -44,7 +60,7 @@ function Delete({ departamento }) {
                         </Button>
                         <Button
                             className="px-2"
-                            onClick={() => setModal(false)}
+                            onClick={() => onFinish()}
                         >
                             Eliminar
                         </Button>

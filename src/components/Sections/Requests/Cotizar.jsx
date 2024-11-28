@@ -1,26 +1,36 @@
-import { Button, Form, Input, Modal, Select } from 'antd'
-import React, { useState } from 'react'
-import { LoadingOutlined } from '@ant-design/icons'
+import { Button, Form, Input, Modal, Select, Upload } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { LoadingOutlined, UploadOutlined } from '@ant-design/icons'
 import { MdEmail } from 'react-icons/md'
+import useBienServicio from '../../../hooks/useBienServicio'
+import Provider from '../../../service/Providers'
+import Correos from '../../../service/Correos'
 
 function Cotizar() {
 
     const [form] = Form.useForm()
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+    const [bienServicioId, setBienServicioId] = useState(null)
+    const [bienesYServicios, setBienesYServicios] = useState(null)
+    const bienServicio = useBienServicio()
+    const [file, setFile] = useState([])
 
 
     const onFinish = values => {
-
         setLoading(true)
+        const formData = new FormData()
+        formData.append('file', file[0])
         try {
 
-            setTimeout(() => {
-                setLoading(false)
-                setModal(false)
-                form.resetFields()
-            }
-                , 2000)
+            Correos.cotizar({
+                Asunto: values.asunto,
+                iD_Bien_Servicio: values.bien_servicio,
+                Lista: values.Proveedores,
+                subject: values.Mensaje,
+                file: formData
+
+            })
 
         } catch (e) {
             console.log(e)
@@ -28,6 +38,34 @@ function Cotizar() {
             setModal(false)
         }
     }
+
+    const propsUpload = {
+        maxCount: 1,
+        onRemove: file => setFile([]),
+        beforeUpload: file => {
+            setFile([file])
+            return false
+        },
+        fileList: file
+    }
+
+
+    useEffect(() => {
+
+        if (bienServicioId) {
+            Provider.bienServicio(bienServicioId)
+                .then(response => {
+                    setBienesYServicios(response)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        }
+
+    }, [bienServicioId])
+
+
+
 
     return (
         <div>
@@ -76,36 +114,42 @@ function Cotizar() {
                             <Select
                                 placeholder="Bien o Servicio"
                                 disabled={loading}
-                                options={[
-                                    { value: '1', label: 'Bien o Servicio 1' },
-                                    { value: '2', label: 'Bien o Servicio 2' },
-                                    { value: '3', label: 'Bien o Servicio 3' },
-                                    { value: '4', label: 'Bien o Servicio 4' },
-                                ]}
-                            />
+                                onChange={(value) => setBienServicioId(value)}
+                            >
+                                {
+                                    bienServicio.data?.map((item, index) => (
+                                        <Select.Option key={index} value={item.iD_Bien_Servicio}>{item.bien_Servicio}</Select.Option>
+                                    ))
+                                }
+                            </Select>
                         </Form.Item>
 
-                        <Form.Item
-                            className="mb-2"
-                            name="Proveedores"
-                            rules={[{
-                                required: true,
-                                message: 'Ingrese la Proveedores'
-                            }]}
-                        >
-                            <Select
-                                mode='multiple'
-                                placeholder="Proveedores"
-                                disabled={loading}
-                                options={[
-                                    { value: '1', label: 'Proveedor 1' },
-                                    { value: '2', label: 'Proveedor 2' },
-                                    { value: '3', label: 'Proveedor 3' },
-                                    { value: '4', label: 'Proveedor 4' },
-                                ]}
-                            />
+                        {
+                            bienServicioId &&
+                            <Form.Item
+                                className="mb-2"
+                                name="Proveedores"
+                                rules={[{
+                                    required: true,
+                                    message: 'Ingrese la Proveedores'
+                                }]}
+                            >
+                                <Select
+                                    mode='multiple'
+                                    placeholder="Proveedores"
+                                    disabled={loading}
 
-                        </Form.Item>
+                                >
+                                    {
+                                        bienesYServicios?.map((item, index) => (
+                                            <Select.Option key={index} value={item.iD_Proveedores}>{item.nombre_Fantasia}</Select.Option>
+                                        ))
+                                    }
+
+                                </Select>
+
+                            </Form.Item>
+                        }
 
                         <Form.Item
                             className="mb-2"
@@ -121,16 +165,9 @@ function Cotizar() {
                             />
                         </Form.Item>
 
-                        <Form.Item
-                            className="mb-2"
-                            name={'file'}
-                            rules={[{
-                                required: true,
-                                message: 'Ingrese el archivo'
-                            }]}
-                        >
-                            <Input type="file" />
-                        </Form.Item>
+                        <Upload {...propsUpload} className="w-full">
+                            <Button icon={<UploadOutlined />} block>Cargar template</Button>
+                        </Upload>
 
                         <Button
                             type="primary"

@@ -13,26 +13,7 @@ function Excel() {
     const downloadExcel = () => {
         setLoading(true)
         try {
-            Excels.OC()
-                .then(response => {
-                    setLoading(false)
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                    setLoading(false)
-                })
-
-        } catch (e) {
-            console.log(e)
-            setLoading(false)
-        }
-    }
-
-    const uploadExcel = () => {
-        setLoading(true)
-        try {
-            Excels.OC()
+            Excels.Requests()
                 .then(response => {
                     setLoading(false)
                     console.log(response)
@@ -71,7 +52,7 @@ function Excel() {
             </Button>
             <Modal
                 open={modal}
-                title="Importar OC"
+                title="Descargar Solicitudes"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -88,22 +69,6 @@ function Excel() {
                         Descargar Excel
 
                     </Button>
-
-                    <Upload  {...propsUpload} className="w-full">
-                        <Button icon={<UploadOutlined />} block>Cargar template</Button>
-                    </Upload>
-
-
-                    <Button
-                        type="primary"
-                        onClick={() => uploadExcel()}
-                        block
-                        loading={loading}
-                        disabled={file.length === 0}
-                    >
-                        Subir Excel
-                    </Button>
-
                 </Form>
 
             </Modal>

@@ -11,7 +11,7 @@ const Create = ({ refetch }) => {
 
     const [modal, setModal] = useState(false)
 
-    console.log(data)
+
 
     const onFinish = values => {
         const id = data.find(item => item.bien_Servicio == values.iD_Bien_Servicio).iD_Bien_Servicio
@@ -270,7 +270,7 @@ const Create = ({ refetch }) => {
                             disabled={loading}
                         />
                     </Form.Item>
-                   
+
 
                     <Button
                         type="primary"

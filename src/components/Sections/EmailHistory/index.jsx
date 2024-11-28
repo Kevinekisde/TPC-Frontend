@@ -58,7 +58,7 @@ function HistorialEmail() {
             />
             <div className='flex justify-between flex-col lg:flex-row items-center mb-4'>
                 <p className='font-semibold text-lg leading-none'>
-                    Historial Correos
+                    Envio Correo Recepcion
                 </p>
             </div>
             <div className="flex flex-col lg:flex-row items-end justify-end gap-2 mb-4">

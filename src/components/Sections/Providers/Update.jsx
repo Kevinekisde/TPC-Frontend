@@ -49,7 +49,6 @@ const Update = ({ proveedor, refetch }) => {
     }, [modal, proveedor])
 
 
-    console.log(proveedor)
 
     return (
         <div>

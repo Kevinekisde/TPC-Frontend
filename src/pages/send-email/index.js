@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '../../components/Template/Layout'
-import EnviarCorreo from '../../components/Sections/SendEmail'
+import HistorialEmail from '../../components/Sections/EmailHistory'
 
 function SendEmail() {
     return (
         <Layout>
-            <EnviarCorreo />
+            <HistorialEmail />
         </Layout>
     )
 }

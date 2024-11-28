@@ -47,6 +47,10 @@
             {
                 "name": "Remplazos",
                 "url": "/replacements"
+            },
+            {
+                "name": "Bien y Servicio",
+                "url": "/bien-servicio"
             }
         ]
     },
@@ -55,11 +59,11 @@
         "items": [
             {
                 "name": "Envió correo recepción",
-                "url": "/send-email"
+                "url": "/email-history"
             },
             {
                 "name": "Historial Correos",
-                "url": "/email-history"
+                "url": "/send-email"
             },
             {
                 "name": "Detalle recepción OC",

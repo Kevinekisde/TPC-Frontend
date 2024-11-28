@@ -13,7 +13,7 @@ function Modalidad({ Form, nextStep, setModalidadState, modalidadState, tipoSoli
     const BienServiciodata = useBienServicio()
 
     const handleModalidad = ({ target }) => {
-        console.log(target.value)
+
         const value = target.value
         setModalidadState(value)
     }
@@ -44,7 +44,6 @@ function Modalidad({ Form, nextStep, setModalidadState, modalidadState, tipoSoli
     const changeFileToByteArray = async (file) => {
 
         const fileByte = await readFileDataAsBase64(file)
-
 
         Archivo.post({
             NombreDocumento: file.name,

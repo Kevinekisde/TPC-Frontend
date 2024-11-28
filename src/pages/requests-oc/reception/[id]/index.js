@@ -1,26 +1,75 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../../../components/Template/Layout'
-import { Breadcrumb } from 'antd'
-import Table from '../../../../components/Template/Table'
+import { Breadcrumb, Table } from 'antd'
+import useProviders from '../../../../hooks/useProviders'
+import RequestOC from '../../../../service/RequestOc'
+import { alertError, alertWarning } from '../../../../utils/alert'
+import { render } from 'react-dom'
+import Enable from './Enable'
+import Delete from './Delete'
 
 
-function index({ location }) {
+function DetailOc({ location }) {
 
     const { ticket } = location.state
 
-    const columns = [
-        { title: 'Pos', dataIndex: 'pos', key: 'pos', align: 'left', responsive: ['md'] },
-        { title: 'Cantidad', dataIndex: 'cantidad', key: 'cantidad', align: 'left', responsive: ['md'] },
-        { title: 'Moneda', dataIndex: 'moneda', key: 'moneda', align: 'center', responsive: ['md'] },
-        { title: 'Prc Neto', dataIndex: 'prc_neto', key: 'prc_neto', align: 'center', responsive: ['md'] },
-        { title: 'Proveedor', dataIndex: 'proveedor', key: 'proveedor', align: 'center', responsive: ['md'] },
-        { title: 'Texto Breve', dataIndex: 'texto_breve', key: 'texto_breve', align: 'center', responsive: ['md'] },
-        { title: 'Material', dataIndex: 'material', key: 'material', align: 'center', responsive: ['md'] },
-        { title: 'Valor Neto', dataIndex: 'valor_neto', key: 'valor_neto', align: 'center', responsive: ['md'] },
+    const { data, isLoading, isSuccess, isError } = useProviders()
 
+    const [OC, setOC] = useState([])
+
+    const columns = [
+        { title: 'Pos', dataIndex: 'posicion', key: 'posicion', align: 'left', responsive: ['md'] },
+        { title: 'Cantidad', dataIndex: 'cantidad', key: 'cantidad', align: 'left', responsive: ['md'] },
+        { title: 'Moneda', dataIndex: 'mon', key: 'mon', align: 'center', responsive: ['md'] },
+        { title: 'Prc Neto', dataIndex: 'prcNeto', key: 'prcNeto', align: 'center', responsive: ['md'] },
+        { title: 'Proveedor', dataIndex: 'proveedor', key: 'proveedor', align: 'center', responsive: ['md'] },
+        { title: 'Texto Breve', dataIndex: 'texto', key: 'texto', align: 'center', responsive: ['md'] },
+        { title: 'Material', dataIndex: 'material', key: 'material', align: 'center', responsive: ['md'] },
+        { title: 'Valor Neto', dataIndex: 'valorNeto', key: 'valorNeto', align: 'center', responsive: ['md'] },
+        {
+            title: 'Eliminar',
+            align: 'center',
+            responsive: ['md'],
+            render: (record) => {
+                return <Delete OC={record} />
+            }
+        },
+        {
+            title: 'Recepcionado',
+            align: 'center',
+            render: (record) => {
+                return <Enable OC={record} />
+            }
+
+        }
     ]
 
+    const getOC = () => {
+        try {
+            RequestOC.getOC(ticket?.iD_Ticket || ticket?.id_Ticket)
+                .then(res => {
+                    setOC(res)
+                })
+                .catch(e => {
+                    alertWarning({ title: 'No hay OC asociadas' })
+                })
 
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    const getProviderData = (id) => {
+
+    }
+
+
+    useEffect(() => {
+        getOC()
+    }, [ticket])
+
+
+    console.log(OC)
 
     return (
         <Layout>
@@ -50,7 +99,7 @@ function index({ location }) {
                             N° Ticket:
                         </p>
                         <p className=''>
-                            {location.state.ticket.ticket}
+                            {location.state.ticket?.iD_Ticket || location.state.ticket?.id_Ticket}
                         </p>
 
                     </div>
@@ -59,7 +108,7 @@ function index({ location }) {
                             N ° Orden de compra:
                         </p>
                         <p className=''>
-                            {location.state.ticket.oc}
+                            {location.state.ticket?.numero_OC}
                         </p>
 
                     </div>
@@ -74,7 +123,7 @@ function index({ location }) {
                             Razon social:
                         </p>
                         <p className=''>
-                            {location.state.ticket.razon_social}
+                            {data ? data.find(prov => prov.nombre_Fantasia === location.state.ticket.proveedor ? location.state.ticket.proveedor : location.state.ticket.iD_Proveedor)?.razon_Social : 'Cargando...'}
                         </p>
 
                     </div>
@@ -83,7 +132,7 @@ function index({ location }) {
                             Nombre Fantasia:
                         </p>
                         <p className=''>
-                            sadsadsasaddsadsa
+                            {location.state.ticket?.iD_Proveedor || location.state.ticket.proveedor}
                         </p>
 
                     </div>
@@ -92,7 +141,7 @@ function index({ location }) {
                             Detalle:
                         </p>
                         <p className=''>
-                            {location.state.ticket.detalle ? location.state.ticket.detalle : 'Sin detalle'}
+                            {ticket?.detalle ? ticket?.detalle : 'Sin detalle'}
                         </p>
                     </div>
                 </div>
@@ -100,8 +149,11 @@ function index({ location }) {
                     Partes
                 </h1>
                 <Table
-                    data={ticket.partes}
-                    columns={columns} />
+                    className='w-full'
+                    dataSource={OC}
+                    columns={columns}
+                    loading={isLoading}
+                />
             </div>
 
 
@@ -109,4 +161,4 @@ function index({ location }) {
     )
 }
 
-export default index
+export default DetailOc

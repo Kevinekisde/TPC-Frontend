@@ -2,22 +2,26 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
+import OrdentEstadistica from '../../../service/OrdenEstadistica';
 import { alertSuccess } from '../../../utils/alert';
-import CentroCosto from '../../../service/CentroCosto';
+import BienServicio from '../../../service/Bien_Servicios';
 
 
-function Delete({ Ceco }) {
+function Delete({ bienServicio }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
 
+    console.log(bienServicio)
+
+
     const onFinish = async () => {
         try {
 
-            CentroCosto.delete(Ceco.id_Ceco)
+            BienServicio.delete(bienServicio.iD_Bien_Servicio)
                 .then(res => {
-                    alertSuccess({ title: 'Solicitud cancelada', content: 'La solicitud ha sido cancelada correctamente' })
+                    alertSuccess({ title: 'Bien y servicio cancelado', content: 'El bien y servicio ha sido cancelado correctamente' })
                 })
                 .catch(error => {
                     console.error(error)
@@ -40,7 +44,7 @@ function Delete({ Ceco }) {
             {
                 modal && <Modal
                     open={modal}
-                    title="Eliminar Centro"
+                    title="Eliminar Orden"
                     centered
                     zIndex={3000}
                     closable={true}
@@ -52,7 +56,7 @@ function Delete({ Ceco }) {
                     width={600}
                 >
                     <div className="flex items-center justify-center gap-2">
-                        <p>¿Estás seguro que deseas eliminar el <b>{Ceco.id_Ceco}</b>?</p>
+                        <p>¿Estás seguro que deseas eliminar el bien y servicio <b>{bienServicio.iD_Bien_Servicio}</b>?</p>
                         <Button
                             className="px-2"
                             onClick={() => setModal(false)}

@@ -44,7 +44,7 @@ const Update = ({ solicitud, refetch }) => {
     }
 
     const changeForm = (e) => {
-        console.log(e.target.value == '')
+       
 
         if (e.target.value == '') {
             setTypeCotizacion(1)
@@ -70,7 +70,6 @@ const Update = ({ solicitud, refetch }) => {
         }
     }, [solicitud])
 
-    console.log(solicitud)
 
 
     return (
@@ -159,7 +158,7 @@ const Update = ({ solicitud, refetch }) => {
                                 <Select placeholder="Bien/Servicio" disabled={loading}>
 
                                     {data.map((item, index) => {
-                                        console.log(item)
+                                     
                                         return (
                                             <Select.Option key={index} value={item.iD_Bien_Servicio}>{item.bien_Servicio}</Select.Option>
                                         )

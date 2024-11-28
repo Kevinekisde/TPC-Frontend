@@ -6,7 +6,7 @@ import User from '../../../service/User'
 
 const Update = ({ user, refetch }) => {
 
-    console.log(user)
+
 
     const [form] = Form.useForm()
 

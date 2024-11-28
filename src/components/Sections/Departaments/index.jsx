@@ -16,7 +16,7 @@ function Departaments() {
 
     const { data, isLoading, isSuccess, refetch } = useDepartament()
 
-    console.log(data)
+
 
     const [search, setSearch] = useState({
         data: [],

@@ -9,6 +9,8 @@ import Create from './Create'
 import useAuthContext from '../../../hooks/useAuthContext'
 import useUsers from '../../../hooks/useUsers'
 import Edit from './Edit'
+import Excel from './Excel'
+import Actions from './Actions'
 
 function Usuarios() {
 
@@ -23,7 +25,7 @@ function Usuarios() {
     })
 
 
-    console.log(data)
+
 
     const handleSearch = e => {
         const user = normalizeText(e.target.value)
@@ -55,7 +57,7 @@ function Usuarios() {
         },
         {
             title: 'Editar', key: 'edit', align: 'center', responsive: ['md'], render: (text, record) => {
-                return <Edit user={record} refetch={refetch} />
+                return <Actions user={record} refetch={refetch} />
             }
         }
         // { title: 'Centro de costos', dataIndex: 'Centro_Costo', key: 'Centro_Costo', align: 'center', responsive: ['md'] },
@@ -89,7 +91,10 @@ function Usuarios() {
                 <div className="flex gap-x-2 order-2">
                     {
                         user.isAdmin &&
-                        <Create refetch={refetch} />
+                        <>
+                            <Create refetch={refetch} />
+                            <Excel />
+                        </>
                     }
                 </div>
                 <Search onChange={handleSearch} />

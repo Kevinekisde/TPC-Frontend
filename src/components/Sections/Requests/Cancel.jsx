@@ -2,13 +2,32 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { LoadingOutlined } from '@ant-design/icons'
 import { SlBan } from 'react-icons/sl';
+import Request from '../../../service/Request';
+import { alertSuccess } from '../../../utils/alert';
 
 
-function Cancel(solicitud) {
+function Cancel({ solicitud }) {
 
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+
+
+    const onFinish = async () => {
+        try {
+
+            Request.delete(solicitud.iD_Cotizacion)
+                .then(res => {
+                    alertSuccess({ title: 'Solicitud cancelada', content: 'La solicitud ha sido cancelada correctamente' })
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+
+        } catch (error) {
+            console.error(error)
+        }
+    }
 
     return (
         <div>
@@ -34,7 +53,7 @@ function Cancel(solicitud) {
                     width={600}
                 >
                     <div className="flex items-center justify-center gap-2">
-                        <p>¿Estás seguro que deseas cancelar la solicitud <b>{solicitud.id}</b>?</p>
+                        <p>¿Estás seguro que deseas cancelar la solicitud <b>{solicitud.iD_Cotizacion}</b>?</p>
                         <Button
                             className="px-2"
                             onClick={() => setModal(false)}
@@ -43,7 +62,7 @@ function Cancel(solicitud) {
                         </Button>
                         <Button
                             className="px-2"
-                            onClick={() => setModal(false)}
+                            onClick={() => onFinish()}
                         >
                             Aceptar
                         </Button>

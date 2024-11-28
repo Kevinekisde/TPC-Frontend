@@ -1,10 +1,33 @@
 import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { MdEmail } from 'react-icons/md'
+import Correos from '../../../service/Correos'
+import { alertSuccess } from '../../../utils/alert'
 
 function Email({ selectedRowKeys }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+
+    const onFinish = values => {
+        try {
+
+            Correos.contabilidad({
+                Lista: selectedRowKeys,
+            })
+                .then(response => {
+                    setLoading(false)
+                    setModal(false)
+                    alertSuccess({ message: `Correo enviado con éxito` })
+                    console.log(response)
+                })
+
+        } catch (e) {
+            console.log(e)
+            setLoading(false)
+            setModal(false)
+        }
+    }
+
     return (
         <div>
             <Button
@@ -48,7 +71,7 @@ function Email({ selectedRowKeys }) {
                             </Button>
                             <Button
                                 className="px-2"
-                                onClick={() => setModal(false)}
+                                onClick={() => onFinish()}
                             >
                                 Enviar
                             </Button>

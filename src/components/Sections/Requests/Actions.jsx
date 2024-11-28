@@ -3,8 +3,10 @@ import Cancel from './Cancel'
 import Update from './Update'
 
 function Actions({ Solicitud, refetch }) {
+
     return (
         <div className='flex items-center justify-center gap-2'>
+
             <Cancel solicitud={Solicitud} />
             <Update solicitud={Solicitud} refetch={refetch} />
         </div>

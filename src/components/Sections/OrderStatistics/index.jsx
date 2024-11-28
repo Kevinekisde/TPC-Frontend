@@ -79,12 +79,13 @@ function OrderStatistics() {
             </div>
             <Table
                 columns={columns}
-                dataSource={isSuccess ? (isNotEmpty(search.order) ? search.data : data) : []}
+                dataSource={isSuccess ? (isNotEmpty(search.order) ? search.data : data.sort((a, b) => a.id_Orden_Estadistica - b.id_Orden_Estadistica)) : []}
                 rowKey='id_Orden_Estadistica'
                 pagination={{ pageSize: 10, showSizeChanger: false }}
                 showSorterTooltip={true}
                 sortDirections={['ascend', 'descend']}
                 key={'id_Orden_Estadistica'}
+
             />
 
         </div>

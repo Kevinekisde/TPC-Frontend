@@ -8,6 +8,7 @@ import Search from './Search'
 import { isNotEmpty } from '../../../utils/validations'
 import useAuthContext from '../../../hooks/useAuthContext'
 import useRequest from '../../../hooks/useRequest'
+import Excel from './Excel'
 
 function Request() {
 
@@ -81,6 +82,14 @@ function Request() {
                 </p>
             </div>
             <div className="flex flex-col lg:flex-row items-center gap-2 mb-4">
+                <div className="flex-1 order-1">
+                </div>
+                {
+                    user?.isAdmin &&
+                    <div className="flex gap-x-2 order-2">
+                        <Excel />
+                    </div>
+                }
                 <Search onChange={handleSearch} />
             </div>
 

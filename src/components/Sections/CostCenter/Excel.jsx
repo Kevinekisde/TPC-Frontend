@@ -10,29 +10,10 @@ function Excel() {
     const [loading, setLoading] = useState(false)
     const [file, setFile] = useState([])
 
-    const downloadExcel = () => {
-        setLoading(true)
-        try {
-            Excels.OC()
-                .then(response => {
-                    setLoading(false)
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                    setLoading(false)
-                })
-
-        } catch (e) {
-            console.log(e)
-            setLoading(false)
-        }
-    }
-
     const uploadExcel = () => {
         setLoading(true)
         try {
-            Excels.OC()
+            Excels.CostCenter()
                 .then(response => {
                     setLoading(false)
                     console.log(response)
@@ -71,7 +52,7 @@ function Excel() {
             </Button>
             <Modal
                 open={modal}
-                title="Importar OC"
+                title="Importar Centro de Costos"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -83,11 +64,6 @@ function Excel() {
             >
 
                 <Form name="import" preserve={false} className='flex flex-col gap-5'>
-
-                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcel()} block>
-                        Descargar Excel
-
-                    </Button>
 
                     <Upload  {...propsUpload} className="w-full">
                         <Button icon={<UploadOutlined />} block>Cargar template</Button>

@@ -13,7 +13,7 @@ function Excel() {
     const downloadExcel = () => {
         setLoading(true)
         try {
-            Excels.OC()
+            Excels.Users()
                 .then(response => {
                     setLoading(false)
                     console.log(response)
@@ -71,7 +71,7 @@ function Excel() {
             </Button>
             <Modal
                 open={modal}
-                title="Importar OC"
+                title="Usuarios"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -88,24 +88,7 @@ function Excel() {
                         Descargar Excel
 
                     </Button>
-
-                    <Upload  {...propsUpload} className="w-full">
-                        <Button icon={<UploadOutlined />} block>Cargar template</Button>
-                    </Upload>
-
-
-                    <Button
-                        type="primary"
-                        onClick={() => uploadExcel()}
-                        block
-                        loading={loading}
-                        disabled={file.length === 0}
-                    >
-                        Subir Excel
-                    </Button>
-
                 </Form>
-
             </Modal>
         </div>
     )

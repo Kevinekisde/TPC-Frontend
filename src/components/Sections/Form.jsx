@@ -31,8 +31,7 @@ function Create() {
         try {
             const values = await form.validateFields()
 
-            console.log(tipoSolicitud)
-            console.log(values)
+       
 
             if (tipoSolicitud === 1) {
 
@@ -40,7 +39,7 @@ function Create() {
                     solped: values.solped ? values.solped : 0,
                     Id_Proveedor: values.proveedor ? values.proveedor.toString() : 0,
                     Id_OE: values.ordenEstadistica ? values.ordenEstadistica.toString() : 0,
-                    Estado: 'Cotizacion en espera',
+                    Estado: 'Recibido',
                     Id_Usuario: user.id_Usuario.toString(),
                     Detalle: values.detalle ? values.detalle : '',
                 })

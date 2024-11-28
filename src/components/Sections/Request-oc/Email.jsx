@@ -1,10 +1,55 @@
 import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { MdEmail } from 'react-icons/md'
+import Correos from '../../../service/Correos'
+import { alertError, alertSuccess } from '../../../utils/alert'
 
 function Email({ selectedRowKeys }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+
+
+
+
+    const onFinish = async () => {
+        try {
+            setLoading(true)
+            if (selectedRowKeys.length == 0) {
+                Correos.post()
+                    .then(response => {
+                        setLoading(false)
+                        setModal(false)
+                        alertSuccess({ message: `Correos Enviados con exito` })
+                        console.log(response)
+                    })
+            }
+            if (selectedRowKeys.length > 0) {
+                Correos.list({
+                    subject: 'Solicitud de OC',
+                    Lista: selectedRowKeys
+                })
+                    .then(response => {
+                        setLoading(false)
+                        setModal(false)
+                        alertSuccess({ message: `Correos Enviados con exito` })
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        alertError({ message: `Error al enviar el correo` })
+                        console.log(error)
+                        setLoading(false)
+                        setModal(false)
+                    })
+            }
+        } catch (error) {
+            alertError({ message: `Error al enviar el correo` })
+            console.log(error)
+            setLoading(false)
+            setModal(false)
+        }
+    }
+
+
     return (
         <div>
             <Button
@@ -39,14 +84,16 @@ function Email({ selectedRowKeys }) {
                         }</p>
                         <div className='flex  gap-5 items-center'>
                             <Button
+                                disabled={loading}
                                 className="px-2"
                                 onClick={() => setModal(false)}
                             >
                                 Cancelar
                             </Button>
                             <Button
+                                disabled={loading}
                                 className="px-2"
-                                onClick={() => setModal(false)}
+                                onClick={() => onFinish()}
                             >
                                 Enviar
                             </Button>

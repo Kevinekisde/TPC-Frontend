@@ -12,6 +12,7 @@ import useAuthContext from '../../../hooks/useAuthContext'
 import { normalizeText } from '../../../utils/paragraph'
 import Search from './Search'
 import { isNotEmpty } from '../../../utils/validations'
+import Excel from './Excel'
 
 
 function Providers() {
@@ -82,7 +83,10 @@ function Providers() {
                 <div className="flex gap-x-2 order-2">
                     {
                         user.isAdmin &&
-                        <Create refetch={refetch} />
+                        <>
+                            <Create refetch={refetch} />
+                            <Excel />
+                        </>
                     }
                 </div>
                 <Search onChange={handleSearch} />

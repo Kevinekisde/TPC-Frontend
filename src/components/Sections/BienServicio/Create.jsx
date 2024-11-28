@@ -1,35 +1,24 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Select } from 'antd'
+import { Button, Modal, Form, Input } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
-import Departamento from '../../../service/Departaments'
-import useUsers from '../../../hooks/useUsers'
+import BienServicio from '../../../service/Bien_Servicios'
 
 const Create = ({ refetch }) => {
-
-    const { data, isLoading, isSuccess } = useUsers()
-
-
 
     const [loading, setLoading] = useState(false)
 
     const [modal, setModal] = useState(false)
 
     const onFinish = values => {
+
         setLoading(true)
         try {
 
-            const id = data.find(u => u.nombre_Completo == values.Encargado).id_Usuario
-
-            const dataValues = {
-                ...values,
-                Encargado: id.toString(),
-            }
-
-            Departamento.post(dataValues)
+            BienServicio.create(values)
                 .then((response) => {
                     setLoading(false)
                     setModal(false)
-                    alertSuccess({ message: `Departamento creado con éxito` })
+                    alertSuccess({ message: `Bien y Servicio creado con éxito` })
                     refetch()
                 })
 
@@ -51,7 +40,7 @@ const Create = ({ refetch }) => {
 
             {modal && <Modal
                 open={modal}
-                title="Agregar Departamento"
+                title="Agregar Bien y Servicio"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -67,7 +56,7 @@ const Create = ({ refetch }) => {
 
                     <Form.Item
                         className="mb-2"
-                        name="Nombre"
+                        name="bien_Servicio"
                         rules={[{
                             required: true,
                             message: 'Ingrese Nombre'
@@ -78,40 +67,6 @@ const Create = ({ refetch }) => {
                             disabled={loading}
                         />
                     </Form.Item>
-
-                    <Form.Item
-                        className="mb-2"
-                        name="Descripcion"
-                        rules={[{
-                            required: true,
-                            message: 'Ingrese Descripcion'
-                        }]}
-                    >
-                        <Input
-                            placeholder="Descripcion"
-                            disabled={loading}
-                        />
-                    </Form.Item>
-
-                    {
-                        isSuccess &&
-                        <Form.Item
-                            className="mb-2"
-                            name="Encargado"
-                            rules={[{
-                                required: true,
-                                message: 'Ingrese Encargado'
-                            }]}
-                        >
-                            <Select placeholder="Encargado" disabled={loading} showSearch>
-                                {data?.filter(u => u.activado == true).map(u => <Select.Option key={u.id_Usuario} value={u.nombre_Completo}>
-                                    {
-                                        u.nombre_Completo
-                                    }
-                                </Select.Option>)}
-                            </Select>
-                        </Form.Item>
-                    }
 
                     <Button
                         type="primary"

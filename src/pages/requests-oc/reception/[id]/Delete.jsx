@@ -2,22 +2,21 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
-import { alertSuccess } from '../../../utils/alert';
-import CentroCosto from '../../../service/CentroCosto';
+import { alertSuccess } from '../../../../utils/alert';
+import RequestOC from '../../../../service/RequestOc';
 
 
-function Delete({ Ceco }) {
+function Delete({ OC }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
-
     const onFinish = async () => {
         try {
 
-            CentroCosto.delete(Ceco.id_Ceco)
+            RequestOC.deleteOC(OC.id_Orden_Compra)
                 .then(res => {
-                    alertSuccess({ title: 'Solicitud cancelada', content: 'La solicitud ha sido cancelada correctamente' })
+                    alertSuccess({ title: 'Orden cancelada', content: 'La orden  ha sido cancelada correctamente' })
                 })
                 .catch(error => {
                     console.error(error)
@@ -40,7 +39,7 @@ function Delete({ Ceco }) {
             {
                 modal && <Modal
                     open={modal}
-                    title="Eliminar Centro"
+                    title="Eliminar Orden"
                     centered
                     zIndex={3000}
                     closable={true}
@@ -52,7 +51,7 @@ function Delete({ Ceco }) {
                     width={600}
                 >
                     <div className="flex items-center justify-center gap-2">
-                        <p>¿Estás seguro que deseas eliminar el <b>{Ceco.id_Ceco}</b>?</p>
+                        <p>¿Estás seguro que deseas eliminar la orden <b>{OC.id_Orden_Compra}</b>?</p>
                         <Button
                             className="px-2"
                             onClick={() => setModal(false)}

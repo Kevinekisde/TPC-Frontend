@@ -27,16 +27,10 @@ function SignIn() {
                         setLoading(false)
                         return alert('Usuario o contraseña incorrectos')
                     }
-                    if (res.contraseña_Usuario == res.codigoMFA && res.activado == false) {
-                        setRes(res)
-                        setStep(2)
-                        setLoading(false)
-                        return
-                    }
-                    // setCorreo(res.correo_Usuario)
-                    // setPassword(res.contraseña_Usuario)
-                    // setRes(res)
-                    // setStep(1)
+                    setCorreo(res.correo_Usuario)
+                    setPassword(res.contraseña_Usuario)
+                    setRes(res)
+                    setStep(1)
 
                 })
                 .catch(error => {

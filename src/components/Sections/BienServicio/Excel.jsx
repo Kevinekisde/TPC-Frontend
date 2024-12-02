@@ -15,7 +15,9 @@ function Excel() {
     const uploadExcel = () => {
         setLoading(true)
         try {
-            Excels.BienServicio()
+            const formData = new FormData()
+            formData.append('file', file[0])
+            Excels.BienServicio({ formData })
                 .then(response => {
                     setLoading(false)
                     console.log(response)

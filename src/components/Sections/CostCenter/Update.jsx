@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, Form, Input } from 'antd'
+import { Button, Modal, Form } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import CentroCosto from '../../../service/CentroCosto'
+import { FloatInput } from 'ant-float-label'
 
 const Update = ({ Ceco, refetch }) => {
 
@@ -75,7 +76,7 @@ const Update = ({ Ceco, refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -89,7 +90,7 @@ const Update = ({ Ceco, refetch }) => {
                             message: 'Ingrese Codigo'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Codigo"
                             disabled={loading}
                         />

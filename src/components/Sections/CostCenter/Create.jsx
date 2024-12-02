@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input } from 'antd'
+import { Button, Modal, Form     } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import CentroCosto from '../../../service/CentroCosto'
+import { FloatInput } from 'ant-float-label'
 
 const Create = ({ refetch }) => {
 
@@ -62,7 +63,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -76,7 +77,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Codigo'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Codigo"
                             disabled={loading}
                         />

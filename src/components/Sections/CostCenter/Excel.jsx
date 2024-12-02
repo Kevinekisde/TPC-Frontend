@@ -13,7 +13,10 @@ function Excel() {
     const uploadExcel = () => {
         setLoading(true)
         try {
-            Excels.CostCenter()
+            const formData = new FormData()
+            formData.append('file', file[0])
+
+            Excels.CostCenter({ FormData })
                 .then(response => {
                     setLoading(false)
                     console.log(response)

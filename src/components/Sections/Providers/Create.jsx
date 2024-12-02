@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Select } from 'antd'
+import { Button, Modal, Form, Select } from 'antd'
 import { alertSuccess, alertError } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import useBienServicio from '../../../hooks/useBienServicio'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Create = ({ refetch }) => {
 
@@ -77,7 +78,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Rut de Proveedor'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Rut"
                             disabled={loading}
                         />
@@ -93,7 +94,7 @@ const Create = ({ refetch }) => {
                             }
                         ]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Razon Social"
                             disabled={loading}
                         />
@@ -108,7 +109,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre Fantasía'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre Fantasía"
                             disabled={loading}
                         />
@@ -124,7 +125,7 @@ const Create = ({ refetch }) => {
                     >
                         {
                             isSuccess &&
-                            <Select
+                            <FloatSelect
                                 placeholder="Bien/Servicio"
                                 disabled={loading}
                                 showSearch={true}
@@ -135,7 +136,7 @@ const Create = ({ refetch }) => {
                                         <Select.Option key={item.bien_Servicio} value={item.bien_Servicio}>{item.bien_Servicio}</Select.Option>
                                     ))
                                 }
-                            </Select>
+                            </FloatSelect>
                         }
 
                     </Form.Item>
@@ -147,7 +148,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Direccion'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Direccion"
                             disabled={loading}
                         />
@@ -160,7 +161,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Comuna'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Comuna"
                             disabled={loading}
                         />
@@ -174,7 +175,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Correo'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Correo"
                             disabled={loading}
                         />
@@ -187,7 +188,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Contacto'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Contacto"
                             disabled={loading}
                         />
@@ -200,7 +201,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Cargo Representante'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Cargo Representante"
                             disabled={loading}
                         />
@@ -213,7 +214,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre Representante'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre Representante"
                             disabled={loading}
                         />
@@ -226,7 +227,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Email Representante'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Email Representante"
                             disabled={loading}
                         />
@@ -239,7 +240,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Numero de cuenta'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Numero de cuenta"
                             disabled={loading}
                         />
@@ -252,7 +253,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Banco'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Banco"
                             disabled={loading}
                         />
@@ -265,7 +266,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Swift'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Swift"
                             disabled={loading}
                         />

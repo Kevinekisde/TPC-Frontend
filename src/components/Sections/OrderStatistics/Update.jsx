@@ -5,6 +5,7 @@ import Providers from '../../../service/Providers'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import useCentroCosto from '../../../hooks/useCentroCosto'
 import OrdentEstadistica from '../../../service/OrdenEstadistica'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Update = ({ order, refetch }) => {
 
@@ -84,7 +85,7 @@ const Update = ({ order, refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -98,11 +99,11 @@ const Update = ({ order, refetch }) => {
                             message: 'Ingrese Centro de Costo'
                         }]}
                     >
-                        <Select placeholder="Centro de Costo" disabled={loading} showSearch>
+                        <FloatSelect placeholder="Centro de Costo" disabled={loading} showSearch>
                             {isSuccess && data.map((item, index) => (
                                 <Select.Option key={index} value={item.nombre}>{item.nombre}</Select.Option>
                             ))}
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
                     <Form.Item

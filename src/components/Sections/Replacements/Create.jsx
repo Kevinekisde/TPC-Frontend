@@ -4,6 +4,7 @@ import { alertSuccess } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import useUsers from '../../../hooks/useUsers'
 import Reemplazos from '../../../service/Replacements'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Create = ({ refetch }) => {
 
@@ -78,7 +79,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre de la persona que se va de vacaciones'
                         }]}
                     >
-                        <Select disabled={loading} placeholder="Persona que se va de vacaciones" onChange={(e) =>
+                        <FloatSelect disabled={loading} placeholder="Persona que se va de vacaciones" onChange={(e) =>
                             setUserVacaciones(e)
                         }>
                             {data.map((user, index) => (
@@ -86,7 +87,7 @@ const Create = ({ refetch }) => {
                                     `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
                                 }</Select.Option>
                             ))}
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
                     {
@@ -99,7 +100,7 @@ const Create = ({ refetch }) => {
                                 message: 'Ingrese Nombre del reemplazante'
                             }]}
                         >
-                            <Select disabled={loading} placeholder="Reemplazante">
+                            <FloatSelect disabled={loading} placeholder="Reemplazante">
                                 {
                                     userVacaciones !== null ?
                                         data.map((user, index) => {
@@ -110,7 +111,7 @@ const Create = ({ refetch }) => {
                                             }
                                         }) : null
                                 }
-                            </Select>
+                            </FloatSelect>
                         </Form.Item>
                     }
 
@@ -123,7 +124,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese un comentario'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Comentario"
                             disabled={loading}
                         />

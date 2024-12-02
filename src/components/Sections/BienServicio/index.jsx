@@ -33,7 +33,11 @@ function BienServicio() {
     const columns = [
         { title: 'ID', dataIndex: 'iD_Bien_Servicio', key: 'iD_Bien_Servicio', align: 'left', responsive: ['md'] },
         { title: 'Nombre', dataIndex: 'bien_Servicio', key: 'bien_Servicio', align: 'left', responsive: ['md'] },
-        {
+
+    ]
+
+    if (user.isAdmin) {
+        columns.push({
             title: 'Acciones',
             dataIndex: 'acciones',
             key: 'acciones',
@@ -41,8 +45,8 @@ function BienServicio() {
             render: (text, record) => (
                 <Actions bienServicio={record} refetch={refetch} />
             ),
-        }
-    ]
+        })
+    }
 
     return (
         <div>

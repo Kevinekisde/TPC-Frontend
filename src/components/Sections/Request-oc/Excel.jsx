@@ -10,29 +10,15 @@ function Excel() {
     const [loading, setLoading] = useState(false)
     const [file, setFile] = useState([])
 
-    const downloadExcel = () => {
-        setLoading(true)
-        try {
-            Excels.OC()
-                .then(response => {
-                    setLoading(false)
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                    setLoading(false)
-                })
 
-        } catch (e) {
-            console.log(e)
-            setLoading(false)
-        }
-    }
 
     const uploadExcel = () => {
         setLoading(true)
         try {
-            Excels.OC()
+            const formData = new FormData()
+            formData.append('file', file[0])
+
+            Excels.OCA({ formData })
                 .then(response => {
                     setLoading(false)
                     console.log(response)
@@ -83,11 +69,6 @@ function Excel() {
             >
 
                 <Form name="import" preserve={false} className='flex flex-col gap-5'>
-
-                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcel()} block>
-                        Descargar Excel
-
-                    </Button>
 
                     <Upload  {...propsUpload} className="w-full">
                         <Button icon={<UploadOutlined />} block>Cargar template</Button>

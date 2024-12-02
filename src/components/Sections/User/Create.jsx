@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Modal, Form, Input, Select } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import User from '../../../service/User'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Create = ({ refetch }) => {
 
@@ -71,7 +72,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -84,7 +85,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Apellido Paterno'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Apellido Paterno"
                             disabled={loading}
                         />
@@ -98,7 +99,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Apellido Materno'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Apellido Materno"
                             disabled={loading}
                         />
@@ -111,7 +112,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Rut'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Rut"
                             disabled={loading}
                         />
@@ -124,12 +125,12 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Liberador'
                         }]}
                     >
-                        <Select placeholder="Liberador" disabled={loading}>
+                        <FloatSelect placeholder="Liberador" disabled={loading}>
                             <Select.Option value="No">No</Select.Option>
                             <Select.Option value="Liberador Financiero">Liberador Financiero</Select.Option>
                             <Select.Option value="Liberador de Departamento ">Liberador Administrativo</Select.Option>
                             <Select.Option value="Ambos">Ambos</Select.Option>
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
                     <Form.Item
@@ -140,7 +141,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Correo'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Correo"
                             disabled={loading}
                         />
@@ -155,7 +156,7 @@ const Create = ({ refetch }) => {
                         }]}
 
                     >
-                        <Input
+                        <FloatInput
                             type='password'
                             placeholder="Contraseña"
                             disabled={loading}
@@ -170,10 +171,10 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese si esta en vacaciones'
                         }]}
                     >
-                        <Select placeholder="Vacaciones" disabled={loading}>
+                        <FloatSelect placeholder="Vacaciones" disabled={loading}>
                             <Select.Option value="1">Si</Select.Option>
                             <Select.Option value="0">No</Select.Option>
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
 
@@ -185,10 +186,10 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Rol'
                         }]}
                     >
-                        <Select placeholder="Rol" disabled={loading}>
+                        <FloatSelect placeholder="Rol" disabled={loading}>
                             <Select.Option value="1">Administrador</Select.Option>
                             <Select.Option value="0">Usuario</Select.Option>
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
                     <Button

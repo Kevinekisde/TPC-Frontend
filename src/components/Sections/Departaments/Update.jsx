@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, Form, Input, Select } from 'antd'
+import { Button, Modal, Form, Select } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import useUsers from '../../../hooks/useUsers'
 import Departamento from '../../../service/Departaments'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Update = ({ departamento, refetch }) => {
 
@@ -87,7 +88,7 @@ const Update = ({ departamento, refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -101,7 +102,7 @@ const Update = ({ departamento, refetch }) => {
                             message: 'Ingrese Descripcion'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Descripcion"
                             disabled={loading}
                         />
@@ -115,9 +116,9 @@ const Update = ({ departamento, refetch }) => {
                             message: 'Ingrese Encargado'
                         }]}
                     >
-                        <Select placeholder="Encargado" disabled={loading}>
+                        <FloatSelect placeholder="Encargado" disabled={loading}>
                             {data.filter(user => user.activado == true).map((user) => <Select.Option key={user.nombre_Completo} value={user.id_Usuario}>{user.nombre_Completo}</Select.Option>)}
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
                     <Button

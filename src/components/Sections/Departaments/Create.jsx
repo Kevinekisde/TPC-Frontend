@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Select } from 'antd'
+import { Button, Modal, Form, Select } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import Departamento from '../../../service/Departaments'
 import useUsers from '../../../hooks/useUsers'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Create = ({ refetch }) => {
 
@@ -73,7 +74,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -87,7 +88,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Descripcion'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Descripcion"
                             disabled={loading}
                         />
@@ -103,13 +104,13 @@ const Create = ({ refetch }) => {
                                 message: 'Ingrese Encargado'
                             }]}
                         >
-                            <Select placeholder="Encargado" disabled={loading} showSearch>
+                            <FloatSelect placeholder="Encargado" disabled={loading} showSearch>
                                 {data?.filter(u => u.activado == true).map(u => <Select.Option key={u.id_Usuario} value={u.nombre_Completo}>
                                     {
                                         u.nombre_Completo
                                     }
                                 </Select.Option>)}
-                            </Select>
+                            </FloatSelect>
                         </Form.Item>
                     }
 

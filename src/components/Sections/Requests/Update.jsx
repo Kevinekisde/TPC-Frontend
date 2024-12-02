@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, Form, Input, Select } from 'antd'
+import { Button, Modal, Form, Select } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import useBienServicio from '../../../hooks/useBienServicio'
 import Request from '../../../service/Request'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Update = ({ solicitud, refetch }) => {
 
@@ -44,7 +45,7 @@ const Update = ({ solicitud, refetch }) => {
     }
 
     const changeForm = (e) => {
-       
+
 
         if (e.target.value == '') {
             setTypeCotizacion(1)
@@ -98,14 +99,14 @@ const Update = ({ solicitud, refetch }) => {
                 <Form form={form} name="edit" onFinish={onFinish} preserve={false} className="pt-4 pb-2">
 
                     <Form.Item
-                        className="mb-2"
+                        className="mb-4"
                         name="solped"
                         rules={[{
                             required: false,
                             message: 'Ingrese N° Solped'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             onChange={changeForm}
                             placeholder="N° Solped"
                             disabled={loading}
@@ -113,33 +114,33 @@ const Update = ({ solicitud, refetch }) => {
                     </Form.Item>
 
                     <Form.Item
-                        className="mb-2"
+                        className="mb-4"
                         name="estado"
                         rules={[{
                             required: true,
                             message: 'Ingrese Estado'
                         }]}
                     >
-                        <Select placeholder="Estado" disabled={loading}>
+                        <FloatSelect placeholder="Estado" disabled={loading}>
                             <Select.Option value="Recibida">Recibida</Select.Option>
                             <Select.Option value="Enviada a Proveedores">
                                 Enviada a Proveedores
                             </Select.Option>
                             <Select.Option value='Cancelada'>Cancelada</Select.Option>
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
                     {
                         typeCotizacion == 1 &&
                         <>
                             <Form.Item
-                                className="mb-2"
+                                className="mb-4"
                                 name="detalle"
                                 rules={[{
                                     required: true,
                                     message: 'Ingrese Detalle'
                                 }]}
                             >
-                                <Input
+                                <FloatInput
                                     placeholder="Detalle"
                                     disabled={loading}
                                 />
@@ -148,22 +149,22 @@ const Update = ({ solicitud, refetch }) => {
 
 
                             <Form.Item
-                                className="mb-2"
+                                className="mb-4"
                                 name="iD_Bien_Servicio"
                                 rules={[{
                                     required: true,
                                     message: 'Ingrese Bien/Servicio'
                                 }]}
                             >
-                                <Select placeholder="Bien/Servicio" disabled={loading}>
+                                <FloatSelect placeholder="Bien/Servicio" disabled={loading}>
 
                                     {data.map((item, index) => {
-                                     
+
                                         return (
                                             <Select.Option key={index} value={item.iD_Bien_Servicio}>{item.bien_Servicio}</Select.Option>
                                         )
                                     })}
-                                </Select>
+                                </FloatSelect>
                             </Form.Item>
                         </>
                     }

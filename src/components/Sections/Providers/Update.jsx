@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, Form, Input, Select, Checkbox } from 'antd'
+import { Button, Modal, Form, Select, Checkbox } from 'antd'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { alertSuccess, alertError } from '../../../utils/alert'
 import Provider from '../../../service/Providers'
 import useBienServicio from '../../../hooks/useBienServicio'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Update = ({ proveedor, refetch }) => {
 
@@ -83,7 +84,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Rut de Proveedor'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Rut"
                             disabled={loading}
                         />
@@ -97,7 +98,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Razón Social'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Razón Social"
                             disabled={loading}
                         />
@@ -111,7 +112,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Nombre Fantasía'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre Fantasía"
                             disabled={loading}
                         />
@@ -125,14 +126,14 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Bien/Servicio'
                         }]}
                     >
-                        <Select
+                        <FloatSelect
                             placeholder="Bien/Servicio"
                             disabled={loading}
                         >
                             {data.map((item, index) => (
                                 <Select.Option key={index} value={item.bien_Servicio}>{item.descripcion}</Select.Option>
                             ))}
-                        </Select>
+                        </FloatSelect>
 
                     </Form.Item>
 
@@ -143,7 +144,7 @@ const Update = ({ proveedor, refetch }) => {
                             required: true,
                             message: 'Ingrese Dirección'
                         }]}>
-                        <Input
+                        <FloatInput
                             placeholder="Dirección"
                             disabled={loading}
                         />
@@ -157,7 +158,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Comuna'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Comuna"
                             disabled={loading}
                         />
@@ -171,7 +172,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Correo'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Correo"
                             disabled={loading}
                         />
@@ -186,7 +187,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Contacto'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Contacto"
                             disabled={loading}
                         />
@@ -200,7 +201,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Cargo Representante'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Cargo Representante"
                             disabled={loading}
                         />
@@ -214,7 +215,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Nombre Representante'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre Representante"
                             disabled={loading}
                         />
@@ -228,7 +229,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Correo Representante'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Correo Representante"
                             disabled={loading}
                         />
@@ -257,7 +258,7 @@ const Update = ({ proveedor, refetch }) => {
                             message: 'Ingrese Número de Cuenta'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Número de Cuenta"
                             disabled={loading}
                         />
@@ -270,7 +271,7 @@ const Update = ({ proveedor, refetch }) => {
                             required: false,
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Banco"
                             disabled={loading}
                         />
@@ -283,7 +284,7 @@ const Update = ({ proveedor, refetch }) => {
                             required: false,
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Swift"
                             disabled={loading}
                         />

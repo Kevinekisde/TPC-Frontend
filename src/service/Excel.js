@@ -6,9 +6,10 @@ class ExcelService {
     OCExcel = () => instance.post('/API/ControladorExcel/OCA');
     Requests = () => instance.get('/API/ControladorOrdenCompra/Imprimir');
     Users = () => instance.get('/API/ControladorUsuario/Imprimir');
-    SingleProvider = (data) => instance.post('/API/ControladorExcel/Proveedor', data, { headers: { 'Content-Type': 'multipart/form-data' } });
-    CostCenter = (data) => instance.post('/API/ControladorExcel/CeCo', data, { headers: { 'Content-Type': 'multipart/form-data' } });
-    BienServicio = (data) => instance.post('/API/ControladorExcel/BS', data, { headers: { 'Content-Type': 'multipart/form-data' } });
+    SingleProvider = (data) => instance.post('/API/ControladorExcel/Proveedor', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    CostCenter = (data) => instance.post('/API/ControladorExcel/CeCo', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    OCA = (data) => instance.post('/API/ControladorExcel/OCA', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    BienServicio = (data) => instance.post('/API/ControladorExcel/BS', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 
 
 }

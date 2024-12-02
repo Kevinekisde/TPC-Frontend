@@ -40,6 +40,7 @@ const Update = ({ solicitud, refetch }) => {
                 fecha_OC_Enviada: solicitud.fecha_OC_Enviada ? solicitud.fecha_OC_Enviada : new Date(),
                 fecha_OC_Liberada: solicitud.fecha_OC_Liberada ? solicitud.fecha_OC_Liberada : new Date(),
                 fecha_OC_Recepcionada: solicitud.fecha_OC_Recepcionada ? solicitud.fecha_OC_Recepcionada : new Date(),
+                
             })
                 .then((response) => {
                     setLoading(false)

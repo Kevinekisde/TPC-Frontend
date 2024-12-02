@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Select } from 'antd'
+import { Button, Modal, Form, Select } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import OrdentEstadistica from '../../../service/OrdenEstadistica'
 import useCentroCosto from '../../../hooks/useCentroCosto'
+import { FloatInput, FloatSelect } from 'ant-float-label'
 
 const Create = ({ refetch }) => {
 
@@ -71,7 +72,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />
@@ -85,11 +86,11 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Centro de Costo'
                         }]}
                     >
-                        <Select placeholder="Centro de Costo" disabled={loading} showSearch>
+                        <FloatSelect placeholder="Centro de Costo" disabled={loading} showSearch>
                             {data.map((item, index) => (
                                 <Select.Option key={index} value={item.nombre}>{item.nombre}</Select.Option>
                             ))}
-                        </Select>
+                        </FloatSelect>
                     </Form.Item>
 
                     <Form.Item
@@ -100,7 +101,7 @@ const Create = ({ refetch }) => {
                             message: 'Ingrese Orden de Compra'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Orden de Compra"
                             disabled={loading}
                         />

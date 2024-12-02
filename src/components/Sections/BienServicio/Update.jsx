@@ -3,6 +3,7 @@ import { Button, Modal, Form, Input, Select } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import BienServicio from '../../../service/Bien_Servicios'
+import { FloatInput } from 'ant-float-label'
 
 const Update = ({ bienServicio, refetch }) => {
 
@@ -73,7 +74,7 @@ const Update = ({ bienServicio, refetch }) => {
                             message: 'Ingrese Nombre'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Nombre"
                             disabled={loading}
                         />

@@ -5,6 +5,7 @@ import { navigate } from 'gatsby'
 import { Button, Form, Input } from 'antd'
 import User from '../../service/User'
 import useAuthContext from '../../hooks/useAuthContext'
+import { alertError } from '../../utils/alert'
 
 function SignIn() {
 
@@ -14,6 +15,7 @@ function SignIn() {
     const [res, setRes] = useState({})
     const [correo, setCorreo] = useState('')
     const [password, setPassword] = useState('')
+    const [userData, setUserData] = useState(null)
 
     const onFinish = async (values) => {
         setLoading(true)
@@ -75,12 +77,37 @@ function SignIn() {
             })
                 .then(res => {
                     console.log(res)
+                    setUserData(res)
+                    setStep(3)
+                }).catch(error => {
+                    alertError({ message: 'Error al crear usuario' })
                 })
 
         } catch (error) {
             console.error(error)
         }
     }
+
+    const changePassword = async (values) => {
+
+        try {
+            User.update(userData.id_Usuario, {
+                ...userData,
+                contraseña_Usuario: values.password
+            })
+                .then(res => {
+                    localStorage.setItem('correo', res.correo_Usuario)
+                    localStorage.setItem('password', res.contraseña_Usuario)
+                    authIsSuccess(res)
+
+                })
+
+        } catch (error) {
+            console.error(error)
+        }
+
+    }
+
 
     return (
         <div className='w-full'>
@@ -210,6 +237,43 @@ function SignIn() {
                                     />
                                 </Form.Item>
 
+                                <Form.Item
+                                    className='w-full'
+                                    name='password'
+                                    rules={[{ required: true, message: 'Por favor ingrese su contraseña' }]}
+                                >
+                                    <Input.Password
+                                        placeholder='Contraseña'
+                                        disabled={loading}
+                                    />
+                                </Form.Item>
+
+                                <Button
+                                    type='primary'
+                                    htmlType='submit'
+                                    block
+                                    loading={loading}
+                                    disabled={loading}
+
+                                >
+                                    Unirme
+                                </Button>
+                            </Form>
+                        </div>
+                    )
+                }
+                {
+                    step == 3 && (
+                        <div className='col-span-2 md:col-span-1 flex flex-col justify-center items-center min-h-screen px-4 md:px-0'>
+                            <div className='w-full sm:w-4/5 lg:w-3/5 mb-8'>
+                                <div className='bloc md:hidden'>
+                                    <img src={Logo} alt='Logo' width={260} className='mb-4 mx-auto' />
+                                </div>
+                                <p className='text-xl text-app text-center font-bold px-4 '>
+                                    Ingrese su nueva contraseña
+                                </p>
+                            </div>
+                            <Form onFinish={changePassword} name='changePassword' autoComplete='off' className='form-expand w-full sm:w-4/5 lg:w-3/5 flex items-center flex-col gap-5'>
                                 <Form.Item
                                     className='w-full'
                                     name='password'

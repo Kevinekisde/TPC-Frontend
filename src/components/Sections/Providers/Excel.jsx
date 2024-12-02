@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { AiFillFileExcel } from 'react-icons/ai'
 import { DownloadOutlined, LoadingOutlined, UploadOutlined } from '@ant-design/icons'
 import Excels from '../../../service/Excel'
+import { alertError, alertSuccess } from '../../../utils/alert'
 
 function Excel() {
 
@@ -13,13 +14,17 @@ function Excel() {
     const uploadExcel = () => {
         setLoading(true)
         try {
-            Excels.SingleProvider()
+
+            const formData = new FormData()
+            formData.append('file', file[0])
+
+            Excels.SingleProvider({ formData })
                 .then(response => {
                     setLoading(false)
-                    console.log(response)
+                    alertSuccess({ message: 'Proveedor importados correctamente' })
                 })
                 .catch(error => {
-                    console.log(error)
+                    alertError({ message: 'Error al importar proveedores' })
                     setLoading(false)
                 })
 

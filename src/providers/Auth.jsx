@@ -15,12 +15,13 @@ const AuthProvider = ({ children }) => {
 
 
     const setUserAttributes = attributes => {
-        const { id_Usuario, correo_Usuario, nombre_Usuario, admin } = attributes;
+        const { id_Usuario, correo_Usuario, nombre_Usuario, admin, Tipo_Liberador } = attributes;
         setUser({
             id_Usuario,
             correo_Usuario,
             nombre_Usuario,
-            isAdmin: admin ? true : false
+            isAdmin: admin ? true : false,
+            isLiberador: Tipo_Liberador !== 'No' ? true : false
         });
     }
 

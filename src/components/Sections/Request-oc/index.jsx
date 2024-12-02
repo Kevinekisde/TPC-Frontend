@@ -1,5 +1,5 @@
-import { Breadcrumb, Button } from 'antd'
-import React, { useState } from 'react'
+import { Breadcrumb, Button, Modal, notification, Space } from 'antd'
+import React, { useEffect, useState } from 'react'
 import Table from '../../Template/Table'
 import { BiCheck, BiCheckDouble, BiX } from 'react-icons/bi'
 import StatusText from '../../Template/StatusText'
@@ -21,6 +21,8 @@ function RequestOC() {
     const { user } = useAuthContext()
 
     const { data, isLoading, isSuccess, isError, refetch } = useRequestOC()
+
+    const [api, contextHolder] = notification.useNotification();
 
     const providers = useProviders()
 
@@ -61,6 +63,27 @@ function RequestOC() {
     }
 
 
+    const openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+            <Space>
+                <Button type="link" size="small" onClick={() => api.destroy()}>
+                    Cerrar
+                </Button>
+
+            </Space>
+        );
+        api.open({
+            message: 'OC Pendiente',
+            description:
+                'Tienes Ordenes de compras pendientes por liberar',
+            btn,
+            key,
+
+        });
+    };
+
+
 
 
     const columns = [
@@ -71,6 +94,8 @@ function RequestOC() {
             onFilter: (value, record) => record.estado.includes(value),
             filterMode: 'tree',
             filterSearch: true,
+            //filtrar por defecto,
+            defaultFilteredValue: ['Espera liberacion', 'Recibido', 'OC Liberada']
         },
         { title: 'Fecha', dataIndex: 'fecha_Creacion_OC', key: 'fecha_Creacion_OC', align: 'center', responsive: ['md'], render: (text, record) => new Date(record.fecha_Creacion_OC).toLocaleDateString() },
         {
@@ -160,9 +185,18 @@ function RequestOC() {
         )
     }
 
+    useEffect(() => {
+        if (user.isLiberador && data?.some(ticket => ticket.estado === 'Espera liberacion')) {
+            openNotification()
+        }
+    }, [data])
+
+
+
 
     return (
         <div>
+            {contextHolder}
             <Breadcrumb
                 items={[
                     {

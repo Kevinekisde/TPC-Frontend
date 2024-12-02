@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "./Head";
 import Navbar from "./Navbar";
 import useAuthContext from "../../hooks/useAuthContext";
 import SignIn from "../Auth/SignIn";
+import { navigate } from "gatsby";
 
 
 const Layout = ({ children }) => {
@@ -10,7 +11,12 @@ const Layout = ({ children }) => {
     const { user, isSignedIn } = useAuthContext()
 
 
-    
+    useEffect(() => {
+        if (isSignedIn && window.location.pathname === '/') {
+            navigate('/requests')
+        }
+    }, [user, isSignedIn])
+
 
     return (
         <>

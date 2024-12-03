@@ -95,7 +95,7 @@ function RequestOC() {
             filterMode: 'tree',
             filterSearch: true,
             //filtrar por defecto,
-            defaultFilteredValue: ['Espera liberacion', 'Recibido', 'OC Liberada']
+            defaultFilteredValue: ['Espera liberacion', 'Recibido', 'OC Liberada', 'OC Enviada']
         },
         { title: 'Fecha', dataIndex: 'fecha_Creacion_OC', key: 'fecha_Creacion_OC', align: 'center', responsive: ['md'], render: (text, record) => new Date(record.fecha_Creacion_OC).toLocaleDateString() },
         {

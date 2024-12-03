@@ -5,6 +5,7 @@ import { MdEmail } from 'react-icons/md'
 import useBienServicio from '../../../hooks/useBienServicio'
 import Provider from '../../../service/Providers'
 import Correos from '../../../service/Correos'
+import { alertError, alertSuccess } from '../../../utils/alert'
 
 function Cotizar() {
 
@@ -21,16 +22,24 @@ function Cotizar() {
         setLoading(true)
         const formData = new FormData()
         formData.append('file', file[0])
+        formData.append('subject', values.Mensaje)
+        formData.append('iD_Bien_Servicio', parseInt(values.bien_servicio))
+        formData.append('Asunto', values.asunto)
+        formData.append('Lista', values.Proveedores)
         try {
 
-            Correos.cotizar({
-                Asunto: values.asunto,
-                iD_Bien_Servicio: values.bien_servicio,
-                Lista: values.Proveedores,
-                subject: values.Mensaje,
-                file: formData
-
-            })
+            Correos.cotizar({ formData })
+                .then(response => {
+                    alertSuccess({ message: 'Cotizacion enviada con exito' })
+                    setLoading(false)
+                    setModal(false)
+                })
+                .catch(error => {
+                    console.log(error)
+                    alertError({ message: 'Error al enviar la cotizacion' })
+                    setLoading(false)
+                    setModal(false)
+                })
 
         } catch (e) {
             console.log(e)

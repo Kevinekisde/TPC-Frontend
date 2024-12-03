@@ -5,6 +5,7 @@ import HistorialCorreoData from '../../../data/HistorialCorreo.json'
 import Search from './Search'
 import { normalizeText } from '../../../utils/paragraph'
 import { isNotEmpty } from '../../../utils/validations'
+import useCorreosRecepcion from '../../../hooks/useCorreosRecepcion'
 
 
 
@@ -12,10 +13,14 @@ function HistorialEmail() {
 
     // N° Ticket / N° OC / Usuario / Fecha Envio / Fecha Respuesta / Respuesta / Proveedor / CeCo / Comentarios / Acciones (el ojo pa ver)
 
+    const { data, isLoading, isSuccess, isError } = useCorreosRecepcion()
+
     const [search, setSearch] = useState({
         data: [],
         email: ''
     })
+
+    console.log(data)
 
     const columns = [
         { title: 'N° Ticket', dataIndex: 'ticket', key: 'ticket', align: 'center' },
@@ -73,7 +78,7 @@ function HistorialEmail() {
 
             <Table
                 columns={columns}
-                data={isNotEmpty(search.email) ? search.data : HistorialCorreoData}
+                data={isSuccess ? (isNotEmpty(search.email) ? search.data : data) : []}
             />
 
         </div>

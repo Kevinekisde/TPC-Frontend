@@ -1,8 +1,9 @@
-import { Button, Form, Modal, Upload } from 'antd'
+import { Alert, Button, Form, Modal, Upload } from 'antd'
 import React, { useState } from 'react'
 import { AiFillFileExcel } from 'react-icons/ai'
 import { DownloadOutlined, LoadingOutlined, UploadOutlined } from '@ant-design/icons'
 import Excels from '../../../service/Excel'
+import { alertError } from '../../../utils/alert'
 
 function Excel() {
 
@@ -17,6 +18,13 @@ function Excel() {
         try {
             const formData = new FormData()
             formData.append('file', file[0])
+
+            //solo archivos excel xlsx 
+            if (file[0].type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                setLoading(false)
+                formData.delete('file')
+                return alertError({ message: 'El archivo debe ser un excel', description: 'Por favor, suba un archivo excel' })
+            }
 
             Excels.OCA({ formData })
                 .then(response => {
@@ -57,7 +65,7 @@ function Excel() {
             </Button>
             <Modal
                 open={modal}
-                title="Importar OC"
+                title="Actualizar Ordenes de Compra"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -70,9 +78,11 @@ function Excel() {
 
                 <Form name="import" preserve={false} className='flex flex-col gap-5'>
 
-                    <Upload  {...propsUpload} className="w-full">
+                    <Upload accept=' '  {...propsUpload} className="w-full">
                         <Button icon={<UploadOutlined />} block>Cargar template</Button>
                     </Upload>
+
+                    <Button className="w-full" icon={<DownloadOutlined />} block onClick={() => Excels.OC()}>Descargar</Button>
 
 
                     <Button

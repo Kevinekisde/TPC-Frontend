@@ -29,34 +29,7 @@ function Excel() {
         }
     }
 
-    const uploadExcel = () => {
-        setLoading(true)
-        try {
-            Excels.OC()
-                .then(response => {
-                    setLoading(false)
-                    console.log(response)
-                })
-                .catch(error => {
-                    console.log(error)
-                    setLoading(false)
-                })
 
-        } catch (e) {
-            console.log(e)
-            setLoading(false)
-        }
-    }
-
-    const propsUpload = {
-        maxCount: 1,
-        onRemove: file => setFile([]),
-        beforeUpload: file => {
-            setFile([file])
-            return false
-        },
-        fileList: file
-    }
 
     return (
         <div>

@@ -18,6 +18,12 @@ function Excel() {
             const formData = new FormData()
             formData.append('file', file[0])
 
+            if (file[0].type !== 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                setLoading(false)
+                formData.delete('file')
+                return alertError({ message: 'El archivo debe ser un excel', description: 'Por favor, suba un archivo excel' })
+            }
+
             Excels.SingleProvider({ formData })
                 .then(response => {
                     setLoading(false)
@@ -74,6 +80,8 @@ function Excel() {
                     <Upload  {...propsUpload} className="w-full">
                         <Button icon={<UploadOutlined />} block>Cargar template</Button>
                     </Upload>
+
+
 
 
                     <Button

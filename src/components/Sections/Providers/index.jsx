@@ -39,6 +39,7 @@ function Providers() {
 
 
     const columns = [
+        { title: 'Id', dataIndex: 'iD_Proveedores', key: 'id', sorter: (a, b) => a.iD_Proveedores - b.iD_Proveedores, align: 'center', showSorterTooltip: { target: 'full-header' }, sortDirections: ['descend'], defaultSortOrder: 'descend' },
         { title: 'Rut', dataIndex: 'rut_Proveedor', key: 'rut', align: 'left', responsive: ['md'] },
         { title: 'Razon social', dataIndex: 'razon_Social', key: 'company_name', align: 'left', responsive: ['md'] },
         { title: 'Nombre fantasia', dataIndex: 'nombre_Fantasia', key: 'fantasy_name', align: 'center' },

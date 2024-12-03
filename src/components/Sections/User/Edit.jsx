@@ -165,7 +165,7 @@ const Update = ({ user, refetch }) => {
                         className="mb-2"
                         name="contraseña_Usuario"
                         rules={[{
-                            required: true,
+                            required: false,
                             message: 'Ingrese Contraseña'
                         }]}
 

@@ -16,6 +16,7 @@ function Navbar() {
     const handleLogout = () => {
         localStorage.removeItem('correo')
         localStorage.removeItem('password')
+        localStorage.removeItem('user')
         navigate('/')
         window.location.reload()
     }

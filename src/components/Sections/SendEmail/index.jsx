@@ -9,9 +9,12 @@ import { isNotEmpty } from '../../../utils/validations';
 import useCorreoRecepcion from '../../../hooks/useCorreoRecepcion';
 import { navigate } from 'gatsby';
 import { HiOutlineDocumentText } from 'react-icons/hi';
+import { useCorreosRecepcion } from '../../../hooks/useCorreosRecepcion';
 
 function EnviarCorreo() {
     // N° Ticket / N° OC / Solicitante / Proveedor / CeCo / Fecha Creacion / Correos Enviados / Primer Correo / Ultimo Correo / Recepcion
+
+
     const { data, isSuccess } = useCorreoRecepcion()
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 

@@ -1,4 +1,4 @@
-import { Breadcrumb } from 'antd'
+import { Breadcrumb, Button } from 'antd'
 import React, { useState } from 'react'
 import Table from '../../Template/Table'
 import UsuariosData from '../../../data/Usuarios.json'
@@ -11,6 +11,8 @@ import useUsers from '../../../hooks/useUsers'
 import Edit from './Edit'
 import Excel from './Excel'
 import Actions from './Actions'
+import { FaEye } from 'react-icons/fa'
+import { navigate } from 'gatsby'
 
 function Usuarios() {
 
@@ -55,6 +57,15 @@ function Usuarios() {
                 )
             }
         },
+        {
+            title: 'Detalle', key: 'detalle', align: 'center', responsive: ['md'], render: (text, record) => {
+                return <Button onClick={() => navigate(`/users/${record.id_Usuario}`, {
+                    state: record
+                })}>
+                    <FaEye />
+                </Button>
+            }
+        }
 
         // { title: 'Centro de costos', dataIndex: 'Centro_Costo', key: 'Centro_Costo', align: 'center', responsive: ['md'] },
     ]

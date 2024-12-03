@@ -36,20 +36,11 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         const correo = localStorage.getItem('correo');
         const password = localStorage.getItem('password');
-        if (correo && password) {
+        const user = localStorage.getItem('user');
 
-            User.auth({
-                correo: correo.trim(),
-                pass: password.trim()
-            })
-                .then(res => {
-                    setUserAttributes(res);
-                    setIsSignedIn(true);
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-
+        if (user) {
+            setUserAttributes(JSON.parse(user));
+            setIsSignedIn(true);
         }
 
         setTimeout(() => {

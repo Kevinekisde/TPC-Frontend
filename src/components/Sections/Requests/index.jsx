@@ -84,6 +84,12 @@ function Request() {
             <div className="flex flex-col lg:flex-row items-center gap-2 mb-4">
                 <div className="flex-1 order-1">
                 </div>
+                {
+                    user?.isAdmin &&
+                    <div className="flex gap-x-2 order-2">
+                        <Excel />
+                    </div>
+                }
 
                 <Search onChange={handleSearch} />
             </div>

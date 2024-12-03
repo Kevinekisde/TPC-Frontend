@@ -239,7 +239,7 @@ const Update = ({ proveedor, refetch }) => {
                         className="mb-2"
                         name="Estado"
                         rules={[{
-                            required: true,
+                            required: false,
                             message: 'Ingrese Estado'
                         }]}>
                         <Select placeholder="Estado" disabled={loading}

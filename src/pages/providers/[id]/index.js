@@ -7,6 +7,8 @@ import { ImUserTie } from 'react-icons/im'
 
 function ProviderDetail({ location }) {
 
+    console.log(location)
+
     return (
         <Layout>
             <Breadcrumb
@@ -78,6 +80,12 @@ function ProviderDetail({ location }) {
                                             N° Cuenta:
                                         </span>
                                         {location.state.n_Cuenta}
+                                    </p>
+                                    <p>
+                                        <span className='font-bold mr-3'>
+                                            Swift:
+                                        </span>
+                                        {location.state.swift}
                                     </p>
                                 </div>
                             </div>

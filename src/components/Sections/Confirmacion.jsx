@@ -11,7 +11,7 @@ function Confirmacion({ data }) {
                     data.iD_Ticket ? `Orden de compra generada con exito` : `Cotizacion generada con exito`
                 }
             </p>
-            <Link to='/requests' className='bg-app text-white px-4 py-2 rounded-md text-xl hover:text-app hover:bg-white  transition-all duration-200'>Volver al inicio</Link>
+            <Link to={data.iD_Ticket ? '/request-oc' : '/request'} className='bg-app text-white px-4 py-2 rounded-md text-xl hover:text-app hover:bg-white transition-all duration-200'>Volver al inicio</Link>
 
         </div>
     )

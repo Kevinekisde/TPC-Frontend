@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Logo from '../../assets/Logo.png'
 import LogoBlanco from '../../assets/LogoBlanco.png'
 import { navigate } from 'gatsby'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, Modal } from 'antd'
 import User from '../../service/User'
 import useAuthContext from '../../hooks/useAuthContext'
 import { alertError } from '../../utils/alert'
@@ -36,11 +36,14 @@ function SignIn() {
 
                 })
                 .catch(error => {
+                    alertError({ message: 'Error al iniciar sesión' })
                     console.error(error)
                     setLoading(false)
                 })
         }
         catch (error) {
+            alertError({ message: 'Error al iniciar sesión' })
+            console.error(error)
 
         }
         setLoading(false)
@@ -57,6 +60,7 @@ function SignIn() {
                     if (res.id_Usuario !== 0) {
                         localStorage.setItem('correo', res.correo_Usuario)
                         localStorage.setItem('password', res.contraseña_Usuario)
+                        localStorage.setItem('user', JSON.stringify(res))
                         authIsSuccess(res)
                     }
                 })
@@ -91,17 +95,19 @@ function SignIn() {
     const changePassword = async (values) => {
 
         try {
-            User.update(userData.id_Usuario, {
-                ...userData,
-                contraseña_Usuario: values.password
+            Modal.warning({
+                title: 'Advertencia',
+                content: 'Esta seguro de esta contraseña?',
+                onOk: () => {
+                    User.update(userData.id_Usuario, {
+                        ...userData,
+                        contraseña_Usuario: values.password
+                    })
+                        .then(res => {
+                            setStep(0)
+                        })
+                }
             })
-                .then(res => {
-                    localStorage.setItem('correo', res.correo_Usuario)
-                    localStorage.setItem('password', res.contraseña_Usuario)
-                    authIsSuccess(res)
-
-                })
-
         } catch (error) {
             console.error(error)
         }
@@ -205,6 +211,7 @@ function SignIn() {
                                     Verificar
                                 </Button>
                             </Form>
+
                         </div>
                     )
                 }
@@ -259,6 +266,9 @@ function SignIn() {
                                     Unirme
                                 </Button>
                             </Form>
+                            <p p className='text-base mt-10'>
+                                ¿Ya tienes cuenta? <span className='text-primary  text-app cursor-pointer' onClick={() => setStep(0)}>Click aqui</span>
+                            </p>
                         </div>
                     )
                 }

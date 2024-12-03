@@ -1,10 +1,14 @@
 import React, { useState } from 'react'
 import { Button, Modal, Form, Input, Select } from 'antd'
-import { alertSuccess } from '../../../utils/alert'
+import { alertError, alertSuccess } from '../../../utils/alert'
 import User from '../../../service/User'
 import { FloatInput, FloatSelect } from 'ant-float-label'
+import useDepartament from '../../../hooks/useDepartament'
 
 const Create = ({ refetch }) => {
+
+
+    const { data, isLoading, isError } = useDepartament()
 
     const [loading, setLoading] = useState(false)
 
@@ -14,11 +18,12 @@ const Create = ({ refetch }) => {
         setLoading(true)
         try {
 
-
             User.post({
                 ...values,
+                tipo_Liberador: values.tipo_Liberador === 'No' ? false : true,
                 en_Vacaciones: values.en_Vacaciones === '1' ? true : false,
-                admin: values.rol === '1' ? true : false
+                admin: values.rol === '1' ? true : false,
+                Id_Departamento: parseInt(values.id_Departamento)
             })
                 .then((response) => {
                     setLoading(false)
@@ -27,6 +32,7 @@ const Create = ({ refetch }) => {
                     refetch()
                 })
                 .catch((error) => {
+                    alertError({ message: 'Error al crear usuario' })
                     setLoading(false)
                     setModal(false)
                     console.log(error)
@@ -38,6 +44,8 @@ const Create = ({ refetch }) => {
             setModal(false)
         }
     }
+
+    console.log(data)
 
     return (
         <div>
@@ -135,6 +143,21 @@ const Create = ({ refetch }) => {
 
                     <Form.Item
                         className="mb-2"
+                        name="id_Departamento"
+                        rules={[{
+                            required: true,
+                            message: 'Ingrese Departamento'
+                        }]}
+                    >
+                        <FloatSelect placeholder="Departamento" disabled={loading}>
+                            {data && data.map((item, index) => (
+                                <Select.Option key={index} value={item.id_Departamento}>{item.nombre}</Select.Option>
+                            ))}
+                        </FloatSelect>
+                    </Form.Item>
+
+                    <Form.Item
+                        className="mb-2"
                         name="Correo_Usuario"
                         rules={[{
                             required: true,
@@ -151,7 +174,7 @@ const Create = ({ refetch }) => {
                         className="mb-2"
                         name="contraseña_Usuario"
                         rules={[{
-                            required: true,
+                            required: false,
                             message: 'Ingrese Contraseña'
                         }]}
 

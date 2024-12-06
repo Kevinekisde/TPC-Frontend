@@ -49,6 +49,7 @@ const Update = ({ user, refetch }) => {
                 Correo_Usuario: user.correo_Usuario,
                 en_Vacaciones: user.en_Vacaciones == false ? '0' : '1',
                 rol: user.admin == false ? '0' : '1',
+                tipo_Liberador: user.tipo_Liberador == false ? 'No' : 'Si'
             })
         }
     }, [modal, user])
@@ -141,9 +142,7 @@ const Update = ({ user, refetch }) => {
                     >
                         <FloatSelect placeholder="Liberador" disabled={loading}>
                             <Select.Option value="No">No</Select.Option>
-                            <Select.Option value="Liberador Financiero">Liberador Financiero</Select.Option>
-                            <Select.Option value="Liberador de Departamento ">Liberador Administrativo</Select.Option>
-                            <Select.Option value="Ambos">Ambos</Select.Option>
+                            <Select.Option value="Si">Si</Select.Option>
                         </FloatSelect>
                     </Form.Item>
 

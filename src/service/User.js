@@ -11,6 +11,7 @@ class UserService {
     OTP = data => instance.post('/API/ControladorAutentizar/MFA', data);
     delete = id => instance.delete(`/API/ControladorUsuario/${id}`);
     newUser = data => instance.post('/API/ControladorAutentizar/nuevo', data);
+    recover = data => instance.post('/API/ControladorAutentizar/pass', data);
 }
 
 const User = new UserService();

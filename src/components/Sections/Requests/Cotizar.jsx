@@ -20,6 +20,8 @@ function Cotizar() {
 
     const onFinish = values => {
         setLoading(true)
+
+        console.log(values)
         const formData = new FormData()
         formData.append('file', file[0])
         formData.append('subject', values.Mensaje)

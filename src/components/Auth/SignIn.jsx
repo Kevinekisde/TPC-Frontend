@@ -5,7 +5,7 @@ import { navigate } from 'gatsby'
 import { Button, Form, Input, Modal } from 'antd'
 import User from '../../service/User'
 import useAuthContext from '../../hooks/useAuthContext'
-import { alertError } from '../../utils/alert'
+import { alertError, alertSuccess } from '../../utils/alert'
 
 function SignIn() {
 
@@ -115,6 +115,25 @@ function SignIn() {
     }
 
 
+    const recoverPassword = async (values) => {
+        try {
+            User.recover({
+                correo: values.email
+            })
+                .then(res => {
+                    alertSuccess({ message: 'Se enviara un correo con su nueva contraseña' })
+                    setStep(0)
+                })
+                .catch(error => {
+                    alertError({ message: 'Error al recuperar contraseña' })
+                    console.error(error)
+                })
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+
     return (
         <div className='w-full'>
 
@@ -174,6 +193,9 @@ function SignIn() {
                             </Form>
                             <p p className='text-base mt-10'>
                                 ¿Usuario Nuevo? <span className='text-primary  text-app cursor-pointer' onClick={() => setStep(2)}>Click aqui</span>
+                            </p>
+                            <p p className='text-base mt-10'>
+                                Perdiste tu contraseña? <span className='text-primary  text-app cursor-pointer' onClick={() => setStep(4)}>Click aqui</span>
                             </p>
                         </div>
                     )
@@ -307,6 +329,48 @@ function SignIn() {
                                 </Button>
                             </Form>
                         </div>
+                    )
+                }
+                {
+                    step == 4 && (
+                        <div className='col-span-2 md:col-span-1 flex flex-col justify-center items-center min-h-screen px-4 md:px-0'>
+                            <div className='w-full sm:w-4/5 lg:w-3/5 mb-8'>
+                                <div className='bloc md:hidden'>
+                                    <img src={Logo} alt='Logo' width={260} className='mb-4 mx-auto' />
+                                </div>
+                                <p className='text-xl text-app text-center font-bold px-4 '>
+                                    Recupere su contraseña
+                                </p>
+                            </div>
+                            <Form onFinish={recoverPassword} name='recoverPassword' autoComplete='off' className='form-expand w-full sm:w-4/5 lg:w-3/5 flex items-center flex-col gap-5'>
+                                <Form.Item
+                                    className='w-full'
+                                    name='email'
+                                    rules={[{ required: true, message: 'Por favor ingrese su email' }]}
+                                >
+                                    <Input
+                                        placeholder='email'
+                                        disabled={loading}
+                                    />
+                                </Form.Item>
+
+                                <Button
+                                    type='primary'
+                                    htmlType='submit'
+                                    block
+                                    loading={loading}
+                                    disabled={loading}
+
+                                >
+                                    Unirme
+                                </Button>
+                            </Form>
+                            <p p className='text-base mt-10'>
+                                ¿Ya tienes cuenta? <span className='text-primary  text-app cursor-pointer' onClick={() => setStep(0)}>Click aqui</span>
+                            </p>
+                        </div>
+
+
                     )
                 }
 

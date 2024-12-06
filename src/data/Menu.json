@@ -51,6 +51,10 @@
             {
                 "name": "Bien y Servicio",
                 "url": "/bien-servicio"
+            },
+            {
+                "name": "Liberadores",
+                "url": "/liberadores"
             }
         ]
     },

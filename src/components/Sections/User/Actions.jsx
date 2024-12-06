@@ -2,6 +2,7 @@ import React from 'react'
 import Edit from './Edit'
 import Delete from './Delete'
 
+
 function Actions({ user, refetch }) {
     return (
         <div className='flex items-center justify-center gap-2'>

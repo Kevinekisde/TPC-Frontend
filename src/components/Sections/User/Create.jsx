@@ -135,9 +135,7 @@ const Create = ({ refetch }) => {
                     >
                         <FloatSelect placeholder="Liberador" disabled={loading}>
                             <Select.Option value="No">No</Select.Option>
-                            <Select.Option value="Liberador Financiero">Liberador Financiero</Select.Option>
-                            <Select.Option value="Liberador de Departamento ">Liberador Administrativo</Select.Option>
-                            <Select.Option value="Ambos">Ambos</Select.Option>
+                            <Select.Option value="Si">Si</Select.Option>
                         </FloatSelect>
                     </Form.Item>
 

@@ -25,6 +25,9 @@ const Update = ({ user, refetch }) => {
                 en_Vacaciones: values.en_Vacaciones == '0' ? false : true,
                 admin: values.rol == '0' ? false : true,
                 Activado: true,
+                tipo_Liberador: values.tipo_Liberador == 'No' ? false : true,
+                ListaIdDep: [0],
+                ListaDepartamento: ['']
             })
                 .then((response) => {
                     setLoading(false)

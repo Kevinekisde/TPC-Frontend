@@ -53,7 +53,7 @@ function BienServicio() {
             <Breadcrumb
                 items={[
                     {
-                        title: <a href="/requests">Inicio</a>,
+                        title: <a href="/solicitud">Inicio</a>,
                     },
                     {
                         title: 'Bien y Servicio',
@@ -74,7 +74,7 @@ function BienServicio() {
                         user.isAdmin &&
                         <>
                             <Create refetch={refetch} />
-                            <Excel />
+                            {/* <Excel /> */}
                         </>
                     }
                 </div>

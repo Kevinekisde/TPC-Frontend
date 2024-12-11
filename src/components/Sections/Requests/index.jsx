@@ -66,7 +66,7 @@ function Request() {
             <Breadcrumb
                 items={[
                     {
-                        title: <a href="/requests">Inicio</a>,
+                        title: <a href="/solicitud">Inicio</a>,
                     },
                     {
                         title: 'Solicitudes de cotizacion',

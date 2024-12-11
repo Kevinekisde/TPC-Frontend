@@ -31,7 +31,7 @@ function Create() {
         try {
             const values = await form.validateFields()
 
-       
+
 
             if (tipoSolicitud === 1) {
 
@@ -57,7 +57,7 @@ function Create() {
                 Request.post({
                     Id_Solicitante: user.id_Usuario.toString(),
                     Fecha_Creacion_Cotizacion: new Date(),
-                    ID_Bien_Servicio: values.bienServicio ? values.bienServicio.toString() : null,
+                    ID_Bien_Servicio: values.bienServicio ? values.bienServicio.toString() : 0,
                     Estado: 'Cotizacion Recibida',
                     Detalle: values.detalle ? values.detalle : '',
                     solped: values.solped ? values.solped : 0,
@@ -85,7 +85,7 @@ function Create() {
             <Breadcrumb
                 items={[
                     {
-                        title: <a href="/requests">Inicio</a>,
+                        title: <a href="/solicitud">Inicio</a>,
                     },
                     {
                         title: 'Crear solicitud',

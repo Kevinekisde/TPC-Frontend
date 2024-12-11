@@ -53,7 +53,7 @@ function CentroDeCosto() {
             <Breadcrumb
                 items={[
                     {
-                        title: <a href="/requests">Inicio</a>,
+                        title: <a href="/solicitud">Inicio</a>,
                     },
                     {
                         title: 'Centros de Costo',
@@ -75,7 +75,7 @@ function CentroDeCosto() {
                         user.isAdmin &&
                         <>
                             <Create refetch={refetch} />
-                            <Excel />
+                            {/* <Excel /> */}
                         </>
                     }
                 </div>

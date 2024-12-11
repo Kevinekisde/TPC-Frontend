@@ -50,7 +50,7 @@ const Create = ({ refetch }) => {
 
             {modal && <Modal
                 open={modal}
-                title="Agregar Orden"
+                title="Agregar Orden Estadistica"
                 centered
                 zIndex={3000}
                 closable={true}

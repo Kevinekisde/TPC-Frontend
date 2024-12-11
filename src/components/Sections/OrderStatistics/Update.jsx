@@ -63,7 +63,7 @@ const Update = ({ order, refetch }) => {
 
             {modal && <Modal
                 open={modal}
-                title="Editar Orden"
+                title="Editar Orden Estadistica"
                 centered
                 zIndex={3000}
                 closable={true}

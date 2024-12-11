@@ -24,10 +24,10 @@ function Cotizar() {
         console.log(values)
         const formData = new FormData()
         formData.append('file', file[0])
-        formData.append('subject', values.Mensaje)
+        formData.append('Mensaje', values.Mensaje)
         formData.append('iD_Bien_Servicio', parseInt(values.bien_servicio))
         formData.append('Asunto', values.asunto)
-        formData.append('Lista', values.Proveedores)
+        formData.append('Proveedor', [values.Proveedores])
         try {
 
             Correos.cotizar({ formData })

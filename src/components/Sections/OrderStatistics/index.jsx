@@ -7,6 +7,7 @@ import { normalizeText } from '../../../utils/paragraph'
 import { isNotEmpty } from '../../../utils/validations'
 import useAuthContext from '../../../hooks/useAuthContext'
 import useOrdenesEstadisticas from '../../../hooks/useOrdenesEstadisticas'
+import Excel from './Excel'
 
 function OrderStatistics() {
 
@@ -34,7 +35,7 @@ function OrderStatistics() {
         { title: 'Id', dataIndex: 'id_Orden_Estadistica', key: 'id_Orden_Estadistica', align: 'left', responsive: ['md'], defaultSortOrder: 'ascend', sorter: (a, b) => a.id_Orden_Estadistica - b.id_Orden_Estadistica },
         { title: 'Nombre', dataIndex: 'nombre', key: 'nombre', align: 'left', responsive: ['md'] },
         { title: 'Centro de costo', dataIndex: 'id_Centro_de_Costo', key: 'id_Centro_de_Costo', align: 'center' },
-        { title: 'Orden Compra', dataIndex: 'codigo_OE', key: 'codigo_OE', align: 'center' },
+        { title: 'Orden Estadistica', dataIndex: 'codigo_OE', key: 'codigo_OE', align: 'center' },
 
     ]
 
@@ -51,7 +52,7 @@ function OrderStatistics() {
             <Breadcrumb
                 items={[
                     {
-                        title: <a href="/requests">Inicio</a>,
+                        title: <a href="/solicitud">Inicio</a>,
                     },
                     {
                         title: 'Ordenes Estadisticas',
@@ -72,7 +73,10 @@ function OrderStatistics() {
                 <div className="flex gap-x-2 order-2">
                     {
                         user.isAdmin &&
-                        <Create refetch={refetch} />
+                        <>
+                            <Create refetch={refetch} />
+                            <Excel />
+                        </>
                     }
                 </div>
                 <Search onChange={handleSearch} />

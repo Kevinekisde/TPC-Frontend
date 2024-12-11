@@ -16,7 +16,9 @@ function Delete({ order }) {
     const onFinish = async () => {
         try {
 
-            OrdentEstadistica.delete(order.id_Orden_Estadistica)
+            OrdentEstadistica.delete(order.id_Orden_Estadistica, {
+                id_Orden_Estadistica: order.id_Orden_Estadistica,
+            })
                 .then(res => {
                     alertSuccess({ title: 'Solicitud cancelada', content: 'La orden estadistica ha sido cancelada correctamente' })
                 })

@@ -23,7 +23,10 @@ const Create = ({ refetch }) => {
                 tipo_Liberador: values.tipo_Liberador === 'No' ? false : true,
                 en_Vacaciones: values.en_Vacaciones === '1' ? true : false,
                 admin: values.rol === '1' ? true : false,
-                Id_Departamento: parseInt(values.id_Departamento)
+                Id_Departamento: parseInt(values.id_Departamento),
+                ListaIdDep: [0],
+                ListaDepartamento: ['']
+
             })
                 .then((response) => {
                     setLoading(false)
@@ -164,22 +167,6 @@ const Create = ({ refetch }) => {
                     >
                         <FloatInput
                             placeholder="Correo"
-                            disabled={loading}
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        className="mb-2"
-                        name="contraseña_Usuario"
-                        rules={[{
-                            required: false,
-                            message: 'Ingrese Contraseña'
-                        }]}
-
-                    >
-                        <FloatInput
-                            type='password'
-                            placeholder="Contraseña"
                             disabled={loading}
                         />
                     </Form.Item>

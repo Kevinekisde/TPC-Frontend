@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Modal, Form, Input } from 'antd'
+import { Button, Modal, Form, Input, Select, DatePicker } from 'antd'
 import { alertSuccess } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
+import { FloatInput, FloatSelect } from 'ant-float-label'
+import useUsers from '../../../hooks/useUsers'
+import Replacements from '../../../service/Replacements'
 
 const Update = ({ reemplazo }) => {
+
+    console.log(reemplazo)
+
+    const { data, isLoading, isSuccess } = useUsers()
+
+    console.log(data)
 
 
     const [form] = Form.useForm()
@@ -13,12 +22,25 @@ const Update = ({ reemplazo }) => {
 
     const [modal, setModal] = useState(false)
 
+    const [date, setDate] = useState('')
+
+    const [userVacaciones, setUserVacaciones] = useState(null)
+
     const onFinish = values => {
 
         setLoading(true)
         try {
 
-            Providers.post(values)
+            const vacacionesId = typeof values.id_Usuario_Vacaciones == 'string' ? data.find(user => user.nombre_Usuario === values.id_Usuario_Vacaciones).id_Usuario : values.id_Usuario_Vacaciones
+            const reemplazanteId = typeof values.id_Usuario_Reemplazante == 'string' ? data.find(user => user.nombre_Usuario === values.id_Usuario_Reemplazante).id_Usuario : values.id_Usuario_Reemplazante
+
+            Replacements.update(reemplazo.iD_Reemplazos, {
+                id_Usuario_Vacaciones: vacacionesId.toString(),
+                id_Usuario_Reemplazante: reemplazanteId.toString(),
+                comentario: values.comentario,
+                fecha_Retorno: reemplazo.fecha_Retorno,
+                ID_Reemplazos: reemplazo.iD_Reemplazos
+            })
                 .then((response) => {
                     setLoading(false)
                     setModal(false)
@@ -30,6 +52,11 @@ const Update = ({ reemplazo }) => {
             setLoading(false)
             setModal(false)
         }
+    }
+
+    const onChange = (date, dateString) => {
+        var dateParse = new Date(dateString);
+        setDate(dateParse)
     }
 
     useEffect(() => {
@@ -66,60 +93,72 @@ const Update = ({ reemplazo }) => {
 
                     <Form.Item
                         className="mb-2"
-                        name="vacations"
+                        name="id_Usuario_Vacaciones"
                         rules={[{
                             required: true,
                             message: 'Ingrese Nombre de la persona que se va de vacaciones'
                         }]}
                     >
-                        <Input
-                            placeholder="Nombre"
-                            disabled={loading}
-                        />
+                        <FloatSelect disabled={loading} placeholder="Persona que se va de vacaciones" onChange={(e) =>
+                            setUserVacaciones(e)
+                        }>
+                            {data.map((user, index) => (
+                                <Select.Option key={index} value={user.id_Usuario}>{
+                                    `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
+                                }</Select.Option>
+                            ))}
+                        </FloatSelect>
                     </Form.Item>
+
 
                     <Form.Item
                         className="mb-2"
-                        name="replacer"
+                        name="id_Usuario_Reemplazante"
                         rules={[{
                             required: true,
                             message: 'Ingrese Nombre del reemplazante'
                         }]}
                     >
-                        <Input
-                            placeholder="Nombre"
-                            disabled={loading}
-                        />
+                        <FloatSelect disabled={loading} placeholder="Reemplazante">
+                            {
+                                userVacaciones !== null ?
+                                    data.map((user, index) => {
+                                        if (user.id_Usuario !== userVacaciones) {
+                                            return <Select.Option key={index} value={user.id_Usuario}>{
+                                                `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
+                                            }</Select.Option>
+                                        }
+                                    }) : null
+                            }
+                        </FloatSelect>
                     </Form.Item>
+
 
 
                     <Form.Item
                         className="mb-2"
-                        name="comment"
+                        name="comentario"
                         rules={[{
                             required: true,
                             message: 'Ingrese un comentario'
                         }]}
                     >
-                        <Input
+                        <FloatInput
                             placeholder="Comentario"
                             disabled={loading}
                         />
                     </Form.Item>
 
-                    <Form.Item
+                    {/* <Form.Item
                         className="mb-2"
-                        name="end_date"
+                        name="fecha_Retorno"
                         rules={[{
                             required: true,
                             message: 'Ingrese la fecha de retorno'
                         }]}
                     >
-                        <Input
-                            placeholder="Fecha de retorno"
-                            disabled={loading}
-                        />
-                    </Form.Item>
+                        <DatePicker onChange={onChange} disabled={loading} />
+                    </Form.Item> */}
 
                     <Button
                         type="primary"

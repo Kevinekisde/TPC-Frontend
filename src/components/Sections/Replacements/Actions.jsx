@@ -2,11 +2,11 @@ import React from 'react'
 import Cancel from './Cancel'
 import Update from './Update'
 
-function Actions({ reemplazo }) {
+function Actions({ Reemplazo }) {
     return (
         <div className='flex items-center justify-center gap-2'>
 
-            <Update reemplazo={reemplazo} />
+            <Update reemplazo={Reemplazo} />
         </div>
     )
 }

@@ -46,6 +46,7 @@ function Providers() {
         { title: 'Bien/Servicio', dataIndex: 'iD_Bien_Servicio', key: 'bien_servicio', align: 'center' },
         { title: 'Comuna', dataIndex: 'comuna', key: 'commune', align: 'center', responsive: ['md'] },
         { title: 'Contacto', dataIndex: 'telefono_Proveedor', key: 'contact', align: 'center' },
+        { title: 'Contacto', dataIndex: 'estado', key: 'contact', align: 'center', render: (text, record) => record.estado ? 'Activo' : 'Inactivo' },
         {
             title: 'Detalle', key: 'detail', align: 'left', responsive: ['md'], render: (text, record) => <Button onClick={() => navigate(`/providers/${record.iD_Proveedores}`, { state: record })} >
                 <FaEye />
@@ -95,7 +96,7 @@ function Providers() {
             <Table
                 loading={isLoadign}
                 columns={columns}
-                data={isSuccess ? (isNotEmpty(search.provider) ? search.data : data) : []}
+                data={isSuccess ? (isNotEmpty(search.provider) ? search.data : data.filter((provider) => provider.estado == true)) : []}
             />
         </div>
     )

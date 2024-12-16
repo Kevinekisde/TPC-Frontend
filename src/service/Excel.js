@@ -10,6 +10,7 @@ class ExcelService {
     CostCenter = (data) => instance.post('/API/ControladorExcel/CeCo', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     OCA = (data) => instance.post('/API/ControladorExcel/OCA', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
     BienServicio = (data) => instance.post('/API/ControladorExcel/BS', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+    SubirOC = (data) => instance.post('/API/ControladorExcel/poss', data.formData, { headers: { 'Content-Type': 'multipart/form-data' } });
 
 
 }

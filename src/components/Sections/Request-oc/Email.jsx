@@ -4,43 +4,36 @@ import { MdEmail } from 'react-icons/md'
 import Correos from '../../../service/Correos'
 import { alertError, alertSuccess } from '../../../utils/alert'
 
-function Email({ selectedRowKeys }) {
+function Email({ selectedRowKeys, allId, refetch }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
+    console.log(allId)
 
 
 
     const onFinish = async () => {
         try {
             setLoading(true)
-            if (selectedRowKeys.length == 0) {
-                Correos.post()
-                    .then(response => {
-                        setLoading(false)
-                        setModal(false)
-                        alertSuccess({ message: `Correos Enviados con exito` })
-                        console.log(response)
-                    })
-            }
-            if (selectedRowKeys.length > 0) {
-                Correos.list({
-                    subject: 'Solicitud de OC',
-                    Lista: selectedRowKeys
+
+            Correos.list({
+                subject: 'Solicitud de OC',
+                Lista: selectedRowKeys.length > 0 ? selectedRowKeys : allId.map(item => item.iD_Ticket.toString())
+            })
+                .then(response => {
+                    setLoading(false)
+                    setModal(false)
+                    alertSuccess({ message: `Correos Enviados con exito` })
+
+                    refetch()
                 })
-                    .then(response => {
-                        setLoading(false)
-                        setModal(false)
-                        alertSuccess({ message: `Correos Enviados con exito` })
-                        console.log(response)
-                    })
-                    .catch(error => {
-                        alertError({ message: `Error al enviar el correo` })
-                        console.log(error)
-                        setLoading(false)
-                        setModal(false)
-                    })
-            }
+                .catch(error => {
+                    alertError({ message: `Error al enviar el correo` })
+                    console.log(error)
+                    setLoading(false)
+                    setModal(false)
+                })
+
         } catch (error) {
             alertError({ message: `Error al enviar el correo` })
             console.log(error)

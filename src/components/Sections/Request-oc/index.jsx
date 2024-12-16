@@ -15,6 +15,9 @@ import { FaEye } from 'react-icons/fa'
 import useRequestOC from '../../../hooks/useRequestOC'
 import Status from '../../../data/Status.json'
 import useProviders from '../../../hooks/useProviders'
+import Subir from './Subir'
+import RequestOCService from '../../../service/RequestOc'
+import { alertSuccess } from '../../../utils/alert'
 
 function RequestOC() {
 
@@ -84,6 +87,25 @@ function RequestOC() {
     };
 
 
+    const RecepcionTotal = async (ticket) => {
+
+        try {
+
+            RequestOCService.RecepcionTotal(ticket.iD_Ticket)
+                .then(response => {
+                    console.log(response)
+                    alertSuccess({ message: 'Recepcion realizada con éxito' })
+                    refetch()
+                })
+
+
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+
 
 
     const columns = [
@@ -115,12 +137,13 @@ function RequestOC() {
         { title: 'Detalle', dataIndex: 'detalle', key: 'detail', align: 'center' },
         {
             title: 'Recepcion', key: 'recepcion', align: 'center', render: (text, record) => {
+                console.log(record)
                 return (
                     <div className='flex justify-center gap-2'>
                         {
                             record.estado == 'OC Enviada' ?
                                 <div className='flex justify-center gap-2'>
-                                    <Button className='px-2'>
+                                    <Button className='px-2' onClick={() => RecepcionTotal(record)} >
                                         <BiCheckDouble />
                                     </Button>
                                     <Button onClick={() => navigate(`/requests-oc/reception/${record.iD_Ticket}`, {
@@ -221,8 +244,9 @@ function RequestOC() {
                 {
                     user.isAdmin &&
                     <div className="flex gap-x-2 order-2">
-                        <Email selectedRowKeys={selectedRowKeys} />
+                        <Email selectedRowKeys={selectedRowKeys} allId={data?.filter(ticket => ticket.estado == 'Espera de liberacion')} refetch={refetch} />
                         <Excel />
+                        <Subir />
                     </div>
                 }
                 <Search onChange={handleSearch} handleSearchBetweenDates={handleSearchBetweenDates} />

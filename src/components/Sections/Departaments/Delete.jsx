@@ -13,14 +13,23 @@ function Delete({ departamento }) {
 
     const onFinish = async () => {
         try {
-
-            Departamento.delete(departamento.id_Departamento)
-                .then(res => {
-                    alertSuccess({ title: 'Departamento cancelada', content: 'El departamento ha sido cancelado' })
-                })
-                .catch(error => {
-                    console.error(error)
-                })
+            setLoading(true)
+            setModal(false)
+            Modal.warning({
+                title: 'Advertencia',
+                content: 'Esta seguro de Eliminar?',
+                onOk: () => {
+                    Departamento.delete(departamento.id_Departamento)
+                        .then(res => {
+                            alertSuccess({ title: 'Departamento cancelada', content: 'El departamento ha sido cancelado' })
+                            setLoading(false)
+                            
+                        })
+                        .catch(error => {
+                            console.error(error)
+                        })
+                }
+            })
 
         } catch (error) {
             console.error(error)

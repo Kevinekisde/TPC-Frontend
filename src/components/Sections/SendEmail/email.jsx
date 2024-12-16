@@ -4,7 +4,7 @@ import { MdEmail } from 'react-icons/md'
 import Correos from '../../../service/Correos'
 import { alertSuccess } from '../../../utils/alert'
 
-function Email({ selectedRowKeys }) {
+function Email({ selectedRowKeys, data }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
@@ -12,7 +12,7 @@ function Email({ selectedRowKeys }) {
         try {
 
             Correos.contabilidad({
-                Lista: selectedRowKeys,
+                Lista: selectedRowKeys.length > 0 ? selectedRowKeys : data.map(item => item.iD_Ticket.toString()),
             })
                 .then(response => {
                     setLoading(false)

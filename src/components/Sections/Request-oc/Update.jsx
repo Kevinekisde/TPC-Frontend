@@ -32,7 +32,7 @@ const Update = ({ solicitud, refetch }) => {
                 estado: values.estado,
                 detalle: values.detalle ? values.detalle : '',
                 solped: values.solped ? values.solped : 0,
-                id_OE: values.id_OE ? typeof (values.id_OE) == 'string' ? ordenEstadistica.data.find(item => item.nombre == values.id_OE).id_Orden_Estadistica.toString() : values.id_OE.toString() : null,
+                n_OE: values.id_OE ? typeof (values.id_OE) == 'string' ? ordenEstadistica.data.find(item => item.nombre == values.id_OE).id_Orden_Estadistica.toString() : values.id_OE.toString() : null,
                 iD_Proveedor: values.iD_Proveedor ? typeof (values.iD_Proveedor) == 'string' ? data.find(item => item.nombre_Fantasia == values.iD_Proveedor).iD_Proveedores.toString() : values.iD_Proveedor.toString() : null,
                 Numero_OC: values.numero_OC ? Number(values.numero_OC) : 0,
                 iD_Ticket: solicitud.iD_Ticket,
@@ -40,7 +40,7 @@ const Update = ({ solicitud, refetch }) => {
                 fecha_OC_Enviada: solicitud.fecha_OC_Enviada ? solicitud.fecha_OC_Enviada : new Date(),
                 fecha_OC_Liberada: solicitud.fecha_OC_Liberada ? solicitud.fecha_OC_Liberada : new Date(),
                 fecha_OC_Recepcionada: solicitud.fecha_OC_Recepcionada ? solicitud.fecha_OC_Recepcionada : new Date(),
-                
+
             })
                 .then((response) => {
                     setLoading(false)

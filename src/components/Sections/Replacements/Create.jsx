@@ -82,7 +82,7 @@ const Create = ({ refetch }) => {
                         <FloatSelect disabled={loading} placeholder="Persona que se va de vacaciones" onChange={(e) =>
                             setUserVacaciones(e)
                         }>
-                            {data.map((user, index) => (
+                            {data.filter((user) => user.en_Vacaciones == true).map((user, index) => (
                                 <Select.Option key={index} value={user.id_Usuario}>{
                                     `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
                                 }</Select.Option>
@@ -103,7 +103,7 @@ const Create = ({ refetch }) => {
                             <FloatSelect disabled={loading} placeholder="Reemplazante">
                                 {
                                     userVacaciones !== null ?
-                                        data.map((user, index) => {
+                                        data.filter((user) => user.en_Vacaciones == false).map((user, index) => {
                                             if (user.id_Usuario !== userVacaciones) {
                                                 return <Select.Option key={index} value={user.id_Usuario}>{
                                                     `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`

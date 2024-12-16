@@ -129,7 +129,7 @@ function EnviarCorreo() {
                 <div className="flex-1 order-1">
                 </div>
                 <div className="flex gap-x-2 order-2">
-                    <Email selectedRowKeys={selectedRowKeys} />
+                    <Email selectedRowKeys={selectedRowKeys} allId={data} />
                 </div>
                 <Search onChange={handleSearch} />
             </div>

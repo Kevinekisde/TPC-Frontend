@@ -9,7 +9,7 @@ class RequestOCService {
     Enable = (id, data) => instance.put(`/API/ControladorOrdenCompra/${id}`, data);
     delete = (id) => instance.delete(`/API/ControladorTicket/${id}`);
     deleteOC = (id) => instance.delete(`/API/ControladorOrdenCompra/${id}`)
-
+    RecepcionTotal = (id) => instance.post(`/API/ControladorTicket/RecepcionTotal/${parseInt(id)}`);
 }
 
 const RequestOC = new RequestOCService();

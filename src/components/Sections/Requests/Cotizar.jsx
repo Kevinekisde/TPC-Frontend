@@ -7,7 +7,9 @@ import Provider from '../../../service/Providers'
 import Correos from '../../../service/Correos'
 import { alertError, alertSuccess } from '../../../utils/alert'
 
-function Cotizar() {
+function Cotizar({ cotizacion }) {
+
+    console.log(cotizacion)
 
     const [form] = Form.useForm()
     const [loading, setLoading] = useState(false)
@@ -21,13 +23,13 @@ function Cotizar() {
     const onFinish = values => {
         setLoading(true)
 
-        console.log(values)
         const formData = new FormData()
         formData.append('file', file[0])
         formData.append('Mensaje', values.Mensaje)
         formData.append('iD_Bien_Servicio', parseInt(values.bien_servicio))
         formData.append('Asunto', values.asunto)
         formData.append('Proveedor', [values.Proveedores])
+        formData.append('Id_Cotizacion', cotizacion.iD_Cotizacion.toString())
         try {
 
             Correos.cotizar({ formData })
@@ -80,12 +82,15 @@ function Cotizar() {
 
     return (
         <div>
-            <Button
-                className="px-2"
-                onClick={() => setModal(true)}
-            >
-                {loading ? <LoadingOutlined /> : <MdEmail twoToneColor="#52c41a" />}
-            </Button>
+            {
+                cotizacion.estado !== 'Cancelado' &&
+                <Button
+                    className="px-2"
+                    onClick={() => setModal(true)}
+                >
+                    {loading ? <LoadingOutlined /> : <MdEmail twoToneColor="#52c41a" />}
+                </Button>
+            }
             {
                 modal && <Modal
                     open={modal}

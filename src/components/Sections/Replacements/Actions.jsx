@@ -7,6 +7,7 @@ function Actions({ Reemplazo }) {
         <div className='flex items-center justify-center gap-2'>
 
             <Update reemplazo={Reemplazo} />
+            <Cancel reemplazo={Reemplazo} />
         </div>
     )
 }

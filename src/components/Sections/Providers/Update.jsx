@@ -254,7 +254,7 @@ const Update = ({ proveedor, refetch }) => {
                         className="mb-2"
                         name="n_Cuenta"
                         rules={[{
-                            required: true,
+
                             message: 'Ingrese Número de Cuenta'
                         }]}
                     >

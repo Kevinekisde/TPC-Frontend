@@ -23,8 +23,8 @@ function HistorialEmail() {
     console.log(data)
 
     const columns = [
-        { title: 'N° Ticket', dataIndex: 'ticket', key: 'ticket', align: 'center' },
-        { title: 'N° OC', dataIndex: 'oc', key: 'oc', align: 'center' },
+        { title: 'N° Ticket', dataIndex: 'n_Ticket', key: 'ticket', align: 'center' },
+        { title: 'N° OC', dataIndex: 'n_OC', key: 'oc', align: 'center' },
         { title: 'Usuario', dataIndex: 'usuario', key: 'usuario', align: 'center' },
         { title: 'Fecha Envio', dataIndex: 'fechaEnvio', key: 'fecha_envio', align: 'center' },
         { title: 'Fecha Respuesta', dataIndex: 'fechaRespuesta', key: 'fecha_respuesta', align: 'center' },

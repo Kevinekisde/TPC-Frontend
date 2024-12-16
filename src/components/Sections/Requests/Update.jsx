@@ -28,7 +28,7 @@ const Update = ({ solicitud, refetch }) => {
                 solped: values.solped ? Number(values.solped) : 0,
                 detalle: values.detalle ? values.detalle : '',
                 iD_Bien_Servicio: values.iD_Bien_Servicio ? typeof (values.iD_Bien_Servicio) == 'string' ?
-                    data.find(item => item.bien_Servicio == values.bien_Servicio).iD_Bien_Servicio : values.iD_Bien_Servicio.toString() : null
+                    data.find(item => item.bien_Servicio == values.bien_Servicio).iD_Bien_Servicio : values.iD_Bien_Servicio.toString() : 0
 
             })
                 .then((response) => {

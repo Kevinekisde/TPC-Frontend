@@ -46,17 +46,17 @@ function Request() {
             }
         },
         { title: 'Detalle', dataIndex: 'detalle', key: 'detail', align: 'center', render: (text, record) => record.solped != 0 ? 'Sin detalle' : record.detalle },
-        { title: 'Bien/Servicio', dataIndex: 'iD_Bien_Servicio', key: 'bien_servicio', align: 'center' },
+        { title: 'Bien/Servicio', dataIndex: 'bien_Servicio', key: 'bien_servicio', align: 'center' },
         {
             title: 'Acciones', dataIndex: 'actions', key: 'actions', align: 'center', render: (text, record) => <Actions Solicitud={record} refetch={refetch} />
         },
     ]
 
-    if (user.isAdmin) {
+    if (user.isAdmin ) {
 
         columns.push(
             {
-                title: 'Cotizar', dataIndex: 'cotizar', key: 'cotizar', align: 'center', render: (text, record) => <Cotizar />
+                title: 'Cotizar', dataIndex: 'cotizar', key: 'cotizar', align: 'center', render: (text, record) => <Cotizar cotizacion={record} />
             }
         )
     }

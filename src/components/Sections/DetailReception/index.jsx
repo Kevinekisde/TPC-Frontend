@@ -8,8 +8,12 @@ import Search from './Search'
 import { navigate } from 'gatsby'
 import { FaEye } from 'react-icons/fa'
 import Cart from './Cart'
+import useRequestOC from '../../../hooks/useRequestOC'
 
 function DetalleRecepcion() {
+
+
+    const { data, isLoading, isSuccess, isError, refetch } = useRequestOC()
 
     const [search, setSearch] = useState({
         data: [],
@@ -27,11 +31,10 @@ function DetalleRecepcion() {
 
     const columns = [
 
-        { title: 'Ticket', dataIndex: 'ticket', key: 'ticket', align: 'center' },
-        { title: 'OC', dataIndex: 'oc', key: 'oc', align: 'center' },
-        { title: 'Fecha Creación', dataIndex: 'fechaCreacion', key: 'fecha_creacion', align: 'center' },
-        { title: 'Proveedor', dataIndex: 'proveedor', key: 'proveedor', align: 'center' },
-        { title: 'CeCo', dataIndex: 'ceco', key: 'ceco', align: 'center' },
+        { title: 'Ticket', dataIndex: 'iD_Ticket', key: 'ticket', align: 'center' },
+        { title: 'OC', dataIndex: 'numero_OC', key: 'oc', align: 'center' },
+        { title: 'Fecha Creación', dataIndex: 'fecha_Creacion_OC', key: 'fecha_creacion', align: 'center' },
+        { title: 'Fecha Recepcion', dataIndex: 'fecha_OC_Recepcionada', key: 'fecha_creacion', align: 'center' },
         {
             title: 'Ver', key: 'detail', align: 'center', responsive: ['md'], render: (text, record) =>
                 <div className='flex justify-center gap-2'>
@@ -40,7 +43,7 @@ function DetalleRecepcion() {
                     })} className='px-2'>
                         <FaEye />
                     </Button>
-                    <Cart />
+                    <Cart record={record} />
                 </div>
         },
 
@@ -81,7 +84,7 @@ function DetalleRecepcion() {
 
             <Table
                 columns={columns}
-                data={isNotEmpty(search.ticket) ? search.data : RecepcionOcData}
+                data={isSuccess ? (isNotEmpty(search.ticket) ? search.data : data) : []}
             />
 
 

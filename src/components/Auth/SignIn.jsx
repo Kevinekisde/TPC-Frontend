@@ -101,7 +101,9 @@ function SignIn() {
                 onOk: () => {
                     User.update(userData.id_Usuario, {
                         ...userData,
-                        contraseña_Usuario: values.password
+                        contraseña_Usuario: values.password,
+                        ListaIdDep: [0],
+                        ListaDepartamento: ['']
                     })
                         .then(res => {
                             setStep(0)

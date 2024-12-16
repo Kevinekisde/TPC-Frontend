@@ -96,7 +96,7 @@ const Update = ({ liberador, refetch }) => {
                         }]}
                     >
                         <FloatSelect placeholder="Usuario" disabled={loading}>
-                            {data && users.data.filter(user => user.tipo_Liberador == "True").map((item, index) => (
+                            {data && users.data.filter(user => user.tipo_Liberador == true).map((item, index) => (
                                 <Select.Option key={index} value={item.id_Usuario}>{item.nombre_Completo}</Select.Option>
                             ))}
                         </FloatSelect>

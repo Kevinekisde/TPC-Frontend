@@ -7,8 +7,13 @@ function Actions({ Solicitud, refetch }) {
     return (
         <div className='flex items-center justify-center gap-2'>
 
-            <Cancel solicitud={Solicitud} />
-            <Update solicitud={Solicitud} refetch={refetch} />
+            {
+                Solicitud.estado !== 'Cancelado' &&
+                <>
+                    <Cancel solicitud={Solicitud} />
+                    <Update solicitud={Solicitud} refetch={refetch} />
+                </>
+            }
         </div>
     )
 }

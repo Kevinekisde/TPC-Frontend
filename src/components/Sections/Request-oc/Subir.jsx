@@ -5,8 +5,9 @@ import { DownloadOutlined, LoadingOutlined, UploadOutlined } from '@ant-design/i
 import Excels from '../../../service/Excel'
 import { alertError } from '../../../utils/alert'
 import { IoReload } from 'react-icons/io5'
+import { MdUploadFile } from 'react-icons/md'
 
-function Excel() {
+function Subir() {
 
     const [modal, setModal] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -27,7 +28,7 @@ function Excel() {
                 return alertError({ message: 'El archivo debe ser un excel', description: 'Por favor, suba un archivo excel' })
             }
 
-            Excels.OCA({ formData })
+            Excels.SubirOC({ formData })
                 .then(response => {
                     setLoading(false)
                     console.log(response)
@@ -61,12 +62,12 @@ function Excel() {
                 onClick={() => setModal(true)}
             >
                 {loading ? <LoadingOutlined /> :
-                    <IoReload size={20} color='green' />
+                    <MdUploadFile size={20} color='green' />
                 }
             </Button>
             <Modal
                 open={modal}
-                title="Actualizar Ordenes de Compra"
+                title="Subir Ordenes de Compra"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -102,4 +103,4 @@ function Excel() {
     )
 }
 
-export default Excel
+export default Subir

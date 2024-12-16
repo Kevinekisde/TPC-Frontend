@@ -1,11 +1,38 @@
 import { Button, Modal, Steps } from 'antd'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaShoppingCart } from 'react-icons/fa'
 import { LoadingOutlined } from '@ant-design/icons'
 
-function Cart() {
+function Cart({ record }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
+    const [step, setStep] = useState(0)
+
+
+    console.log(record)
+
+    const changeStep = () => {
+
+        if (record.estado == 'OC Enviada') {
+            setStep(3)
+        }
+
+        if (record.estado == 'OC Parcial') {
+            setStep(4)
+        }
+
+        if (record.estado == 'OC Recepcionada') {
+            setStep(5)
+        }
+
+
+
+    }
+
+    useEffect(() => {
+        changeStep()
+    }, [record])
+
 
     return (
         <div>
@@ -30,31 +57,56 @@ function Cart() {
                     width={1000}
                 >
                     <div className="flex items-center justify-center gap-2 p-5">
-                        <Steps
-                            progressDot
-                            current={4}
-                            items={[
-                                {
-                                    title: 'Ticket Recibido',
-                                    description: '30/10/2024'
 
-                                },
-                                {
-                                    title: 'Liberada Depto',
-                                    description: 'Solicitante',
-                                },
-                                {
-                                    title: 'Liberada Finanzas',
-                                },
-                                {
-                                    title: 'OC Enviada',
-                                    description: '05/11/2024',
-                                },
-                                {
-                                    title: 'Espera Recepción',
-                                },
-                            ]}
-                        />
+                        {
+                            record.estado == 'OC Cancelada' || record.estado == 'OC No Recepcionada' &&
+                            <div className=''>
+
+                                <Steps
+                                    progressDot
+                                    status='error'
+                                    current={1}
+                                    items={[
+
+                                        {
+                                            title: 'OC Cancelada',
+                                        },
+
+                                    ]}
+                                />
+                            </div>
+                        }
+                        {
+                            record.estado !== 'OC Cancelada' && record.estado !== 'OC No Recepcionada' &&
+                            <Steps
+                                progressDot
+                                current={step}
+                                items={[
+                                    {
+                                        title: 'Ticket Recibido',
+
+
+                                    },
+                                    {
+                                        title: 'Liberada Depto',
+                                        description: 'Solicitante',
+                                    },
+                                    {
+                                        title: 'Liberada Finanzas',
+                                    },
+                                    {
+                                        title: 'OC Enviada',
+
+                                    },
+                                    {
+                                        title: 'OC Parcial',
+                                    },
+                                    {
+                                        title: 'OC Recepcionada',
+                                    },
+                                ]}
+                            />
+                        }
                     </div>
                 </Modal>
             }

@@ -11,7 +11,7 @@ import Delete from './Delete'
 
 function DetailOc({ location }) {
 
-    const { ticket } = location.state
+
 
     const { data, isLoading, isSuccess, isError } = useProviders()
 
@@ -46,7 +46,7 @@ function DetailOc({ location }) {
 
     const getOC = () => {
         try {
-            RequestOC.getOC(ticket?.iD_Ticket || ticket?.id_Ticket)
+            RequestOC.getOC(location.state?.ticket?.iD_Ticket || location.state?.ticket?.id_Ticket)
                 .then(res => {
                     setOC(res)
                 })
@@ -59,17 +59,14 @@ function DetailOc({ location }) {
         }
     }
 
-    const getProviderData = (id) => {
 
-    }
 
 
     useEffect(() => {
         getOC()
-    }, [ticket])
+    }, [location.state?.ticket])
 
 
-    console.log(OC)
 
     return (
         <Layout>
@@ -99,7 +96,7 @@ function DetailOc({ location }) {
                             N° Ticket:
                         </p>
                         <p className=''>
-                            {location.state.ticket?.iD_Ticket || location.state.ticket?.id_Ticket}
+                            {location.state?.ticket?.iD_Ticket || location.state?.ticket?.id_Ticket}
                         </p>
 
                     </div>
@@ -108,7 +105,7 @@ function DetailOc({ location }) {
                             N ° Orden de compra:
                         </p>
                         <p className=''>
-                            {location.state.ticket?.numero_OC}
+                            {location.state?.ticket?.numero_OC}
                         </p>
 
                     </div>
@@ -123,7 +120,7 @@ function DetailOc({ location }) {
                             Razon social:
                         </p>
                         <p className=''>
-                            {data ? data.find(prov => prov.nombre_Fantasia === location.state.ticket.proveedor ? location.state.ticket.proveedor : location.state.ticket.iD_Proveedor)?.razon_Social : 'Cargando...'}
+                            {data ? data.find(prov => prov.nombre_Fantasia === location.state?.ticket.proveedor ? location.state?.ticket.proveedor : location.state?.ticket.iD_Proveedor)?.razon_Social : 'Cargando...'}
                         </p>
 
                     </div>
@@ -132,7 +129,7 @@ function DetailOc({ location }) {
                             Nombre Fantasia:
                         </p>
                         <p className=''>
-                            {location.state.ticket?.iD_Proveedor || location.state.ticket.proveedor}
+                            {location.state?.ticket?.iD_Proveedor || location.state?.ticket.proveedor}
                         </p>
 
                     </div>
@@ -141,7 +138,7 @@ function DetailOc({ location }) {
                             Detalle:
                         </p>
                         <p className=''>
-                            {ticket?.detalle ? ticket?.detalle : 'Sin detalle'}
+                            {location.state?.ticket?.detalle ? location.state?.ticket?.detalle : 'Sin detalle'}
                         </p>
                     </div>
                 </div>

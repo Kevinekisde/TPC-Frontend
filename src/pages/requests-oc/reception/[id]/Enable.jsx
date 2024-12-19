@@ -6,7 +6,7 @@ import RequestOC from '../../../../service/RequestOc'
 const Enable = ({ OC }) => {
 
     const [loading, setLoading] = useState(false)
-    const [checked, setChecked] = useState(OC.recepcion)
+    const [checked, setChecked] = useState(OC?.recepcion)
 
     const handleEnableOC = () => {
 

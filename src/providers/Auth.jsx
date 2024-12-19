@@ -37,6 +37,13 @@ const AuthProvider = ({ children }) => {
         const correo = localStorage.getItem('correo');
         const password = localStorage.getItem('password');
         const user = localStorage.getItem('user');
+        const fecha = localStorage.getItem('fecha');
+
+        //expiracion de 12 horas
+        if (fecha && new Date().getTime() - new Date(fecha).getTime() > 43200000) {
+            localStorage.clear();
+            setIsSignedIn(false);
+        }
 
         if (user) {
             setUserAttributes(JSON.parse(user));

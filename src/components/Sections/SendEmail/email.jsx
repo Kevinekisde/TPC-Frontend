@@ -4,7 +4,7 @@ import { MdEmail } from 'react-icons/md'
 import Correos from '../../../service/Correos'
 import { alertSuccess } from '../../../utils/alert'
 
-function Email({ selectedRowKeys, data }) {
+function Email({ selectedRowKeys, data, refetch }) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
 
@@ -12,12 +12,13 @@ function Email({ selectedRowKeys, data }) {
         try {
 
             Correos.contabilidad({
-                Lista: selectedRowKeys.length > 0 ? selectedRowKeys : data.map(item => item.iD_Ticket.toString()),
+                Lista: selectedRowKeys.length > 0 ? selectedRowKeys : data.map(item => item.iD_Ticket),
             })
                 .then(response => {
                     setLoading(false)
                     setModal(false)
                     alertSuccess({ message: `Correo enviado con éxito` })
+                    refetch()
                     console.log(response)
                 })
 

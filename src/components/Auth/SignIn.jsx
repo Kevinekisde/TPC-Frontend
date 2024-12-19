@@ -61,6 +61,7 @@ function SignIn() {
                         localStorage.setItem('correo', res.correo_Usuario)
                         localStorage.setItem('password', res.contraseña_Usuario)
                         localStorage.setItem('user', JSON.stringify(res))
+                        localStorage.setItem('fecha', new Date())
                         authIsSuccess(res)
                     }
                 })

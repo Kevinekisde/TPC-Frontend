@@ -52,7 +52,8 @@ const Update = ({ user, refetch }) => {
                 Correo_Usuario: user.correo_Usuario,
                 en_Vacaciones: user.en_Vacaciones == false ? '0' : '1',
                 rol: user.admin == false ? '0' : '1',
-                tipo_Liberador: user.tipo_Liberador == false ? 'No' : 'Si'
+                tipo_Liberador: user.tipo_Liberador == false ? 'No' : 'Si',
+                contraseña_Usuario: ''
             })
         }
     }, [modal, user])
@@ -167,7 +168,7 @@ const Update = ({ user, refetch }) => {
                         className="mb-2"
                         name="contraseña_Usuario"
                         rules={[{
-                            required: false,
+                            required: true,
                             message: 'Ingrese Contraseña'
                         }]}
 

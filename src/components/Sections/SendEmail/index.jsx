@@ -15,7 +15,7 @@ function EnviarCorreo() {
     // N° Ticket / N° OC / Solicitante / Proveedor / CeCo / Fecha Creacion / Correos Enviados / Primer Correo / Ultimo Correo / Recepcion
 
 
-    const { data, isSuccess } = useCorreoRecepcion()
+    const { data, isSuccess, refetch } = useCorreoRecepcion()
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
     const [search, setSearch] = useState({
@@ -128,7 +128,7 @@ function EnviarCorreo() {
                 <div className="flex-1 order-1">
                 </div>
                 <div className="flex gap-x-2 order-2">
-                    <Email selectedRowKeys={selectedRowKeys} allId={data} />
+                    <Email selectedRowKeys={selectedRowKeys} allId={data} refetch={refetch} />
                 </div>
                 <Search onChange={handleSearch} />
             </div>

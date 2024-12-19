@@ -65,18 +65,17 @@ function Usuarios() {
                     <FaEye />
                 </Button>
             }
+        },
+        {
+            title: 'Editar', key: 'edit', align: 'center', responsive: ['md'], render: (text, record) => {
+                return <Actions user={record} refetch={refetch} />
+            }
         }
 
         // { title: 'Centro de costos', dataIndex: 'Centro_Costo', key: 'Centro_Costo', align: 'center', responsive: ['md'] },
     ]
 
-    if (user.isAdmin) {
-        columns.push({
-            title: 'Editar', key: 'edit', align: 'center', responsive: ['md'], render: (text, record) => {
-                return <Actions user={record} refetch={refetch} />
-            }
-        })
-    }
+
 
 
     return (

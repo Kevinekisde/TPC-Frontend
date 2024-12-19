@@ -19,6 +19,7 @@ function Navbar() {
         localStorage.removeItem('correo')
         localStorage.removeItem('password')
         localStorage.removeItem('user')
+        localStorage.removeItem('fecha')
         navigate('/')
         window.location.reload()
     }

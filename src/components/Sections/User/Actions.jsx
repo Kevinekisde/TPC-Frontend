@@ -1,13 +1,27 @@
 import React from 'react'
 import Edit from './Edit'
 import Delete from './Delete'
+import useAuthContext from '../../../hooks/useAuthContext'
 
 
 function Actions({ user, refetch }) {
+
+    const dataUser = useAuthContext()
+
+    console.log(dataUser)
+    console.log(user)
+
     return (
         <div className='flex items-center justify-center gap-2'>
-            <Edit user={user} refetch={refetch} />
-            <Delete user={user} refetch={refetch} />
+            {
+                dataUser.isAdmin || dataUser.user.id_Usuario == user.id_Usuario &&
+                <Edit user={user} refetch={refetch} />
+            }
+            {
+                dataUser.isAdmin &&
+                <Delete user={user} refetch={refetch} />
+
+            }
         </div>
     )
 }

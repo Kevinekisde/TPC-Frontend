@@ -3,17 +3,14 @@ import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
 import OrdentEstadistica from '../../../service/OrdenEstadistica';
-import { alertSuccess } from '../../../utils/alert';
+import { alertError, alertSuccess } from '../../../utils/alert';
 import User from '../../../service/User';
 
 
-function Delete({ user }) {
+function Delete({ user, refetch }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
-
-
-    console.log(user)
 
 
     const onFinish = async () => {
@@ -22,12 +19,15 @@ function Delete({ user }) {
             User.delete(user.id_Usuario)
                 .then(res => {
                     alertSuccess({ title: 'Usuario cancelado', content: 'El usuario ha sido eliminado correctamente' })
+                    refetch()
                 })
                 .catch(error => {
                     console.error(error)
+                    alertError({ title: 'Error', message: 'Ha ocurrido un error al eliminar el usuario' })
                 })
 
         } catch (error) {
+            alertError({ title: 'Error', message: 'Ha ocurrido un error al eliminar el usuario' })
             console.error(error)
         }
     }

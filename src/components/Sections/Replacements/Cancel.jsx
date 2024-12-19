@@ -6,9 +6,8 @@ import Reemplazos from '../../../service/Replacements';
 import { alertError, alertSuccess } from '../../../utils/alert';
 
 
-function Cancel({ reemplazo }) {
+function Cancel({ reemplazo, refetch }) {
 
-    console.log(reemplazo)
 
 
     const [loading, setLoading] = useState(false)
@@ -25,12 +24,14 @@ function Cancel({ reemplazo }) {
                     setLoading(false)
                     alertSuccess({ message: `Reemplazo cancelado con éxito` })
                     setModal(false)
+                    refetch()
                 })
                 .catch(error => {
                     console.log(error)
                     setLoading(false)
                     setModal(false)
                     alertError({ message: `Error al cancelar el reemplazo` })
+                    refetch()
                 })
 
 

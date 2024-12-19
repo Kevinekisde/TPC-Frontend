@@ -56,7 +56,7 @@ function Remplazos() {
 
     if (user.isAdmin) {
         columns.push({
-            title: 'Acciones', key: 'edit', align: 'center', render: (text, record) => <Actions Reemplazo={record} />
+            title: 'Acciones', key: 'edit', align: 'center', render: (text, record) => <Actions Reemplazo={record} refetch={refetch} />
         })
     }
 

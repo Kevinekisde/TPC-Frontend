@@ -6,7 +6,7 @@ import Departamento from '../../../service/Departaments';
 import { alertSuccess } from '../../../utils/alert';
 
 
-function Delete({ departamento }) {
+function Delete({ departamento, refetch }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
@@ -22,8 +22,9 @@ function Delete({ departamento }) {
                     Departamento.delete(departamento.id_Departamento)
                         .then(res => {
                             alertSuccess({ title: 'Departamento cancelada', content: 'El departamento ha sido cancelado' })
+                            refetch()
                             setLoading(false)
-                            
+
                         })
                         .catch(error => {
                             console.error(error)

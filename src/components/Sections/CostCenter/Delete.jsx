@@ -2,11 +2,11 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
-import { alertSuccess } from '../../../utils/alert';
+import { alertError, alertSuccess } from '../../../utils/alert';
 import CentroCosto from '../../../service/CentroCosto';
 
 
-function Delete({ Ceco }) {
+function Delete({ Ceco, refetch }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
@@ -18,8 +18,10 @@ function Delete({ Ceco }) {
             CentroCosto.delete(Ceco.id_Ceco)
                 .then(res => {
                     alertSuccess({ title: 'Solicitud cancelada', content: 'La solicitud ha sido cancelada correctamente' })
+                    refetch()
                 })
                 .catch(error => {
+                    alertError({ title: 'Error', content: 'Ha ocurrido un error al cancelar la solicitud' })
                     console.error(error)
                 })
 

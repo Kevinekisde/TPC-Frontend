@@ -41,17 +41,21 @@ function Liberadores() {
         },
 
         { title: 'Nombre Departamento', dataIndex: 'nombre_Departamento', key: 'nombre_Departamento', align: 'left', responsive: ['md'] },
-        {
+
+
+    ]
+
+    if (user.isAdmin) {
+        columns.push({
             title: 'Cambiar Liberador', dataIndex: 'actions', key: 'actions', align: 'center', responsive: ['md'],
             render: (text, record) => (
                 <div className='flex justify-center items-center gap-2'>
                     <Editar liberador={record} refetch={refetch} />
                 </div>
             )
-        }
+        })
+    }
 
-
-    ]
     return (
         <div>
             <Breadcrumb

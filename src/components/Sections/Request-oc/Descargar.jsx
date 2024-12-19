@@ -1,25 +1,27 @@
-import { Button, Form, Modal, Upload } from 'antd'
+import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
-import { AiFillFileExcel } from 'react-icons/ai'
-import { DownloadOutlined, LoadingOutlined, UploadOutlined } from '@ant-design/icons'
+import { DownloadOutlined, LoadingOutlined } from '@ant-design/icons'
 import Excels from '../../../service/Excel'
+import { IoDownload } from 'react-icons/io5'
+import { MdDownload } from 'react-icons/md'
 
-function Excel() {
+function Descargar() {
 
     const [modal, setModal] = useState(false)
     const [loading, setLoading] = useState(false)
-    const [file, setFile] = useState([])
+
 
     const downloadExcel = () => {
         setLoading(true)
         try {
-            Excels.Requests()
+            Excels.OC()
                 .then(response => {
+                    console.log(response)
                     setLoading(false)
                     //download blob type
                     var link = document.createElement('a');
                     link.href = window.URL.createObjectURL(response);
-                    link.download = 'Solicitudes.xlsx';
+                    link.download = 'OrdenesCompra.xlsx';
                     link.click();
                 })
                 .catch(error => {
@@ -33,16 +35,6 @@ function Excel() {
         }
     }
 
-    const propsUpload = {
-        maxCount: 1,
-        onRemove: file => setFile([]),
-        beforeUpload: file => {
-            setFile([file])
-            return false
-        },
-        fileList: file
-    }
-
     return (
         <div>
 
@@ -51,12 +43,12 @@ function Excel() {
                 onClick={() => setModal(true)}
             >
                 {loading ? <LoadingOutlined /> :
-                    <AiFillFileExcel size={20} color='green' />
+                    <MdDownload size={20} color='green' />
                 }
             </Button>
             <Modal
                 open={modal}
-                title="Descargar Solicitudes"
+                title="Descargar Ordenes de Compra"
                 centered
                 zIndex={3000}
                 closable={true}
@@ -67,17 +59,12 @@ function Excel() {
                 footer={null}
             >
 
-                <Form name="import" preserve={false} className='flex flex-col gap-5'>
+                <Button className="w-full" icon={<DownloadOutlined />} block onClick={() => downloadExcel()}>Descargar</Button>
 
-                    <Button icon={<DownloadOutlined />} onClick={() => downloadExcel()} block>
-                        Descargar Excel
-
-                    </Button>
-                </Form>
 
             </Modal>
         </div>
     )
 }
 
-export default Excel
+export default Descargar

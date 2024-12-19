@@ -23,7 +23,7 @@ function Excel() {
                 return alertError({ message: 'El archivo debe ser un excel', description: 'Por favor, suba un archivo excel' })
             }
 
-            Excels.CostCenter({ FormData })
+            Excels.CostCenter({ formData })
                 .then(response => {
                     setLoading(false)
                     console.log(response)

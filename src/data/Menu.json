@@ -45,7 +45,7 @@
                 "url": "/users"
             },
             {
-                "name": "Remplazos",
+                "name": "Reemplazos",
                 "url": "/replacements"
             },
             {
@@ -63,17 +63,18 @@
         "items": [
             {
                 "name": "Envió correo recepción",
-                "url": "/email-history"
+                "url": "/email-history",
+                "user": "admin"
             },
             {
                 "name": "Historial Correos",
-                "url": "/send-email"
+                "url": "/send-email",
+                "user": "admin"
             },
             {
                 "name": "Detalle recepción OC",
                 "url": "/detail-reception"
             }
-        ],
-        "user": "admin"
+        ]
     }
 ]

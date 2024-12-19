@@ -32,7 +32,6 @@ function EnviarCorreo() {
         })
     }
 
-    console.log(data)
 
     const columns = [
         { title: 'N° Ticket', dataIndex: 'id_Ticket', key: 'ticket', align: 'center' },
@@ -86,15 +85,15 @@ function EnviarCorreo() {
                             <Button
                                 className='px-2'
                                 onClick={() => {
-                                    const selected = selectedRowKeys.includes(record.iD_Solicitante)
+                                    const selected = selectedRowKeys.includes(record.id_Ticket)
                                     if (selected) {
-                                        setSelectedRowKeys(selectedRowKeys.filter(key => key !== record.iD_Solicitante))
+                                        setSelectedRowKeys(selectedRowKeys.filter(key => key !== record.id_Ticket))
                                     } else {
-                                        setSelectedRowKeys([...selectedRowKeys, record.iD_Solicitante])
+                                        setSelectedRowKeys([...selectedRowKeys, record.id_Ticket])
                                     }
                                 }}
                             >
-                                {selectedRowKeys.includes(record.iD_Solicitante) ? <BiCheck /> : <BiX />}
+                                {selectedRowKeys.includes(record.id_Ticket) ? <BiCheck /> : <BiX />}
                             </Button>
                         }
                     </div>

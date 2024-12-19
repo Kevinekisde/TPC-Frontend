@@ -84,7 +84,7 @@ function Subir() {
                         <Button icon={<UploadOutlined />} block>Cargar template</Button>
                     </Upload>
 
-                    <Button className="w-full" icon={<DownloadOutlined />} block onClick={() => Excels.OC()}>Descargar</Button>
+
 
                     <Button
                         type="primary"

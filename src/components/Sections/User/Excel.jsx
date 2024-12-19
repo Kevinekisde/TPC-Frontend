@@ -15,9 +15,14 @@ function Excel() {
         try {
             Excels.Users()
                 .then(response => {
-                    console.log(typeof (response))
+
                     setLoading(false)
-                    console.log(response)
+                    //downloadFile type 
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(response);
+                    link.download = 'Usuarios.xlsx';
+                    link.click();
+
                 })
                 .catch(error => {
                     console.log(error)

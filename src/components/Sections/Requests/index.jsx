@@ -22,6 +22,7 @@ function Request() {
     })
 
 
+
     const handleSearch = e => {
         const ticket = normalizeText(e.target.value)
         const result = data.filter(t => normalizeText(t.iD_Cotizacion.toString()).includes(ticket) || normalizeText(t.estado).includes(ticket) || normalizeText(t.solped.toString()).includes(ticket) || normalizeText(t.detalle).includes(ticket) || normalizeText(t.iD_Bien_Servicio).includes(ticket))
@@ -52,7 +53,7 @@ function Request() {
         },
     ]
 
-    if (user.isAdmin ) {
+    if (user.isAdmin) {
 
         columns.push(
             {
@@ -96,7 +97,9 @@ function Request() {
 
             <Table
                 columns={columns}
-                data={isSuccess ? (isNotEmpty(search.ticket) ? search.data : data) : []}
+                data={isSuccess ? (isNotEmpty(search.ticket) ? search.data :
+                    user.isAdmin ? data : data.filter(t => t.IdS == user.id_Usuario)
+                ) : []}
             />
         </div>
     )

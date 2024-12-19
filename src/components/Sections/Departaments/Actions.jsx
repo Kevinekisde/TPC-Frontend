@@ -6,7 +6,7 @@ function Actions({ departamento, refetch }) {
     return (
         <div className='flex items-center justify-center gap-2'>
             <Update departamento={departamento} refetch={refetch} />
-            <Delete departamento={departamento} />
+            <Delete departamento={departamento} refetch={refetch} />
         </div>
     )
 }

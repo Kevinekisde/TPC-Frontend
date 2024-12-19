@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
 import OrdentEstadistica from '../../../service/OrdenEstadistica';
-import { alertSuccess } from '../../../utils/alert';
+import { alertError, alertSuccess } from '../../../utils/alert';
 import BienServicio from '../../../service/Bien_Servicios';
 
 
-function Delete({ bienServicio }) {
+function Delete({ bienServicio, refetch }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
@@ -21,9 +21,11 @@ function Delete({ bienServicio }) {
 
             BienServicio.delete(bienServicio.iD_Bien_Servicio)
                 .then(res => {
-                    alertSuccess({ title: 'Bien y servicio cancelado', content: 'El bien y servicio ha sido cancelado correctamente' })
+                    alertSuccess({ title: 'Bien y servicio cancelado', message: 'El bien y servicio ha sido cancelado correctamente' })
+                    refetch()
                 })
                 .catch(error => {
+                    alertError({ title: 'Error', message: 'Ha ocurrido un error al cancelar el bien y servicio' })
                     console.error(error)
                 })
 

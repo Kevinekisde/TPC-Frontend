@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { AiFillFileExcel } from 'react-icons/ai'
 import { DownloadOutlined, LoadingOutlined, UploadOutlined } from '@ant-design/icons'
 import Excels from '../../../service/Excel'
-import { alertError } from '../../../utils/alert'
+import { alertError, alertSuccess } from '../../../utils/alert'
 import { IoReload } from 'react-icons/io5'
 
 function Excel() {
@@ -11,7 +11,6 @@ function Excel() {
     const [modal, setModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [file, setFile] = useState([])
-
 
 
     const uploadExcel = () => {
@@ -29,19 +28,22 @@ function Excel() {
 
             Excels.OCA({ formData })
                 .then(response => {
+
                     setLoading(false)
-                    console.log(response)
+                    alertSuccess({ message: 'Ordenes de compra actualizadas correctamente' })
                 })
                 .catch(error => {
-                    console.log(error)
+
                     setLoading(false)
+                    alertError({ message: 'Error al actualizar ordenes de compra' })
                 })
 
         } catch (e) {
-            console.log(e)
+            alertError({ message: 'Error al actualizar ordenes de compra' })
             setLoading(false)
         }
     }
+
 
     const propsUpload = {
         maxCount: 1,
@@ -83,7 +85,6 @@ function Excel() {
                         <Button icon={<UploadOutlined />} block>Cargar template</Button>
                     </Upload>
 
-                    <Button className="w-full" icon={<DownloadOutlined />} block onClick={() => Excels.OC()}>Descargar</Button>
 
                     <Button
                         type="primary"

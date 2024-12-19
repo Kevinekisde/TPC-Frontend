@@ -11,6 +11,8 @@ function Navbar() {
 
     const { user } = useAuthContext()
 
+    console.log(user)
+
     const [open, setOpen] = useState(false)
 
     const handleLogout = () => {
@@ -46,8 +48,12 @@ function Navbar() {
                                         <Popover className='cursor-pointer border-transparent transition-all duration-200 hover:border-white  border-b-2' placement='bottom' key={index} content={
                                             <div className='flex flex-col gap-2 !cursor-pointer'>
                                                 {
-                                                    item.items.map((subitem, i) => (
-                                                        <Link key={i} to={subitem.url} className="text-sm text-[#556a89] hover:text-app hover:border-app border-b-2 border-transparent transition-all duration-200 py-2 px-4 text-center cursor-pointer " activeClassName="text-app link-active font-medium">
+                                                    !user.isAdmin ? item.items.filter((item) => item.user !== 'admin').map((subitem, index) => (
+                                                        <Link to={subitem.url} className="text-sm text-[#556a89] hover:text-app hover:border-app border-b-2 border-transparent transition-all duration-200 py-2 px-4 text-center cursor-pointer " activeClassName="text-app link-active font-medium">
+                                                            {subitem.name}
+                                                        </Link>
+                                                    )) : item.items.map((subitem, index) => (
+                                                        <Link to={subitem.url} className="text-sm text-[#556a89] hover:text-app hover:border-app border-b-2 border-transparent transition-all duration-200 py-2 px-4 text-center cursor-pointer " activeClassName="text-app link-active font-medium">
                                                             {subitem.name}
                                                         </Link>
                                                     ))

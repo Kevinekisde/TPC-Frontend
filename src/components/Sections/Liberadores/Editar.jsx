@@ -29,8 +29,6 @@ const Update = ({ liberador, refetch }) => {
 
             const User = typeof (values.id_Usuario) == "string" ? users.data.find(user => user.nombre_Usuario == values.id_Usuario).id_Usuario : values.id_Usuario
 
-            console.log(User)
-
             Liberadores.update(liberador.id_Liberador, {
                 id_Liberador: liberador.id_Liberador,
                 id_Usuario: User,

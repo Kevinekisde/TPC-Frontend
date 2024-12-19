@@ -6,7 +6,7 @@ import { alertSuccess } from '../../../utils/alert';
 import RequestOC from '../../../service/RequestOc';
 
 
-function Cancel({ solicitud }) {
+function Cancel({ solicitud, refetch }) {
 
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
@@ -19,6 +19,7 @@ function Cancel({ solicitud }) {
             RequestOC.delete(solicitud.iD_Ticket)
                 .then(res => {
                     alertSuccess({ title: 'Solicitud cancelada', content: 'La solicitud ha sido cancelada correctamente' })
+                    refetch()
                 })
                 .catch(error => {
                     console.error(error)

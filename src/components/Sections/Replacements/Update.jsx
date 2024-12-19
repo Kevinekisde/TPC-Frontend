@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Modal, Form, Input, Select, DatePicker } from 'antd'
-import { alertSuccess } from '../../../utils/alert'
+import { alertError, alertSuccess } from '../../../utils/alert'
 import Providers from '../../../service/Providers'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FloatInput, FloatSelect } from 'ant-float-label'
 import useUsers from '../../../hooks/useUsers'
 import Replacements from '../../../service/Replacements'
 
-const Update = ({ reemplazo }) => {
+const Update = ({ reemplazo, refetch }) => {
 
-    console.log(reemplazo)
 
-    const { data, isLoading, isSuccess } = useUsers()
-
-    console.log(data)
-
+    const { data } = useUsers()
 
     const [form] = Form.useForm()
 
@@ -22,20 +18,21 @@ const Update = ({ reemplazo }) => {
 
     const [modal, setModal] = useState(false)
 
-    const [date, setDate] = useState('')
+    const [setDate] = useState('')
 
-    const [userVacaciones, setUserVacaciones] = useState(null)
+    const [userVacaciones] = useState(null)
 
     const onFinish = values => {
 
         setLoading(true)
         try {
 
-            const vacacionesId = typeof values.id_Usuario_Vacaciones == 'string' ? data.find(user => user.nombre_Usuario === values.id_Usuario_Vacaciones).id_Usuario : values.id_Usuario_Vacaciones
             const reemplazanteId = typeof values.id_Usuario_Reemplazante == 'string' ? data.find(user => user.nombre_Usuario === values.id_Usuario_Reemplazante).id_Usuario : values.id_Usuario_Reemplazante
 
             Replacements.update(reemplazo.iD_Reemplazos, {
-                id_Usuario_Vacaciones: vacacionesId.toString(),
+                N_IdV: reemplazo.n_IdV,
+                N_IdR: reemplazanteId,
+                id_Usuario_Vacaciones: reemplazo.n_IdV.toString(),
                 id_Usuario_Reemplazante: reemplazanteId.toString(),
                 comentario: values.comentario,
                 fecha_Retorno: reemplazo.fecha_Retorno,
@@ -45,12 +42,20 @@ const Update = ({ reemplazo }) => {
                     setLoading(false)
                     setModal(false)
                     alertSuccess({ message: `Reemplazo Actualizada con éxito` })
-
+                    refetch()
+                })
+                .catch(error => {
+                    console.log(error)
+                    setLoading(false)
+                    setModal(false)
+                    alertError({ message: `Error al actualizar el reemplazo` })
                 })
 
         } catch (e) {
+            console.log(e)
             setLoading(false)
             setModal(false)
+            alertError({ message: `Error al actualizar el reemplazo` })
         }
     }
 
@@ -93,26 +98,6 @@ const Update = ({ reemplazo }) => {
 
                     <Form.Item
                         className="mb-2"
-                        name="id_Usuario_Vacaciones"
-                        rules={[{
-                            required: true,
-                            message: 'Ingrese Nombre de la persona que se va de vacaciones'
-                        }]}
-                    >
-                        <FloatSelect disabled={loading} placeholder="Persona que se va de vacaciones" onChange={(e) =>
-                            setUserVacaciones(e)
-                        }>
-                            {data.map((user, index) => (
-                                <Select.Option key={index} value={user.id_Usuario}>{
-                                    `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
-                                }</Select.Option>
-                            ))}
-                        </FloatSelect>
-                    </Form.Item>
-
-
-                    <Form.Item
-                        className="mb-2"
                         name="id_Usuario_Reemplazante"
                         rules={[{
                             required: true,
@@ -121,14 +106,14 @@ const Update = ({ reemplazo }) => {
                     >
                         <FloatSelect disabled={loading} placeholder="Reemplazante">
                             {
-                                userVacaciones !== null ?
-                                    data.map((user, index) => {
-                                        if (user.id_Usuario !== userVacaciones) {
-                                            return <Select.Option key={index} value={user.id_Usuario}>{
-                                                `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
-                                            }</Select.Option>
-                                        }
-                                    }) : null
+
+                                data.map((user, index) => {
+                                    if (user.id_Usuario !== userVacaciones) {
+                                        return <Select.Option key={index} value={user.id_Usuario}>{
+                                            `${user.nombre_Usuario} ${user.apellido_paterno} ${user.apellido_materno}`
+                                        }</Select.Option>
+                                    }
+                                })
                             }
                         </FloatSelect>
                     </Form.Item>

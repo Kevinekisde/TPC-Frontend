@@ -96,7 +96,7 @@ function Providers() {
             <Table
                 loading={isLoadign}
                 columns={columns}
-                data={isSuccess ? (isNotEmpty(search.provider) ? search.data : data.filter((provider) => provider.estado == true)) : []}
+                data={isSuccess ? (isNotEmpty(search.provider) ? search.data : data) : []}
             />
         </div>
     )

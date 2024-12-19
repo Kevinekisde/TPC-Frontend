@@ -18,13 +18,17 @@ import useProviders from '../../../hooks/useProviders'
 import Subir from './Subir'
 import RequestOCService from '../../../service/RequestOc'
 import { alertSuccess } from '../../../utils/alert'
+import Descargar from './Descargar'
 
 function RequestOC() {
 
     const { user } = useAuthContext()
 
+
+
     const { data, isLoading, isSuccess, isError, refetch } = useRequestOC()
 
+    console.log(data)
     const [api, contextHolder] = notification.useNotification();
 
     const providers = useProviders()
@@ -117,7 +121,7 @@ function RequestOC() {
             filterMode: 'tree',
             filterSearch: true,
             //filtrar por defecto,
-            defaultFilteredValue: ['Espera liberacion', 'Recibido', 'OC Liberada', 'OC Enviada']
+            defaultFilteredValue: user.isAdmin ? ['Espera liberacion', 'Recibido', 'OC Liberada', 'OC Enviada'] : ['Espera liberacion', 'Recibido', 'OC Liberada', 'OC Enviada', 'OC Parcial', 'OC No Recepcionada']
         },
         { title: 'Fecha', dataIndex: 'fecha_Creacion_OC', key: 'fecha_Creacion_OC', align: 'center', responsive: ['md'], render: (text, record) => new Date(record.fecha_Creacion_OC).toLocaleDateString() },
         {
@@ -137,11 +141,10 @@ function RequestOC() {
         { title: 'Detalle', dataIndex: 'detalle', key: 'detail', align: 'center' },
         {
             title: 'Recepcion', key: 'recepcion', align: 'center', render: (text, record) => {
-                console.log(record)
                 return (
                     <div className='flex justify-center gap-2'>
                         {
-                            record.estado == 'OC Enviada' ?
+                            record.estado == 'OC Enviada' || record.estado == 'OC Parcial' ?
                                 <div className='flex justify-center gap-2'>
                                     <Button className='px-2' onClick={() => RecepcionTotal(record)} >
                                         <BiCheckDouble />
@@ -190,15 +193,15 @@ function RequestOC() {
                                 <Button
                                     className='px-2'
                                     onClick={() => {
-                                        const selected = selectedRowKeys.includes(record.id_U)
+                                        const selected = selectedRowKeys.includes(record.iD_Ticket)
                                         if (selected) {
-                                            setSelectedRowKeys(selectedRowKeys.filter(key => key !== record.id_U))
+                                            setSelectedRowKeys(selectedRowKeys.filter(key => key !== record.iD_Ticket))
                                         } else {
-                                            setSelectedRowKeys([...selectedRowKeys, record.id_U])
+                                            setSelectedRowKeys([...selectedRowKeys, record.iD_Ticket])
                                         }
                                     }}
                                 >
-                                    {selectedRowKeys.includes(record.id_U) ? <BiCheck /> : <BiX />}
+                                    {selectedRowKeys.includes(record.iD_Ticket) ? <BiCheck /> : <BiX />}
                                 </Button>
                             }
                         </div>
@@ -247,6 +250,7 @@ function RequestOC() {
                         <Email selectedRowKeys={selectedRowKeys} allId={data?.filter(ticket => ticket.estado == 'Espera de liberacion')} refetch={refetch} />
                         <Excel />
                         <Subir />
+                        <Descargar />
                     </div>
                 }
                 <Search onChange={handleSearch} handleSearchBetweenDates={handleSearchBetweenDates} />
@@ -258,7 +262,9 @@ function RequestOC() {
 
             <Table
                 columns={columns}
-                data={isSuccess ? (isNotEmpty(search.ticket) ? search.data : data) : []}
+                data={isSuccess ? (isNotEmpty(search.ticket) ? search.data :
+                    user.isAdmin ? data : data.filter(ticket => ticket.id_U == user.id_Usuario)
+                ) : []}
                 ActiverowSelection
                 selectedRowKeys={selectedRowKeys}
                 setSelectedRowKeys={setSelectedRowKeys}

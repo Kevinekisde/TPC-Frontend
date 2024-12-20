@@ -98,7 +98,7 @@ function Request() {
             <Table
                 columns={columns}
                 data={isSuccess ? (isNotEmpty(search.ticket) ? search.data :
-                    user.isAdmin ? data : data.filter(t => t.IdS == user.id_Usuario)
+                    user.isAdmin ? data : data.filter(t => t.idS == user.id_Usuario)
                 ) : []}
             />
         </div>

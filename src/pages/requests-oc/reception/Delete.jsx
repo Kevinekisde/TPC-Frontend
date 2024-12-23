@@ -2,8 +2,8 @@ import { Button, Modal } from 'antd'
 import React, { useState } from 'react'
 import { EditOutlined, LoadingOutlined } from '@ant-design/icons'
 import { FaRegTrashAlt } from "react-icons/fa";
-import { alertSuccess } from '../../../../utils/alert';
-import RequestOC from '../../../../service/RequestOc';
+import { alertSuccess } from '../../../utils/alert';
+import RequestOC from '../../../service/RequestOc';
 
 
 function Delete({ OC }) {

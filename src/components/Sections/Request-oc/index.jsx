@@ -149,7 +149,7 @@ function RequestOC() {
                                     <Button className='px-2' onClick={() => RecepcionTotal(record)} >
                                         <BiCheckDouble />
                                     </Button>
-                                    <Button onClick={() => navigate(`/requests-oc/reception/${record.iD_Ticket}`, {
+                                    <Button onClick={() => navigate(`/requests-oc/reception/`, {
                                         state: { ticket: record }
                                     })} className='px-2'>
                                         <BiCheck />
@@ -167,7 +167,7 @@ function RequestOC() {
         {
             title: 'Ver', key: 'detail', align: 'center', responsive: ['md'], render: (text, record) =>
                 <div className='flex justify-center gap-2'>
-                    <Button onClick={() => navigate(`/requests-oc/reception/${record.iD_Ticket}`, {
+                    <Button onClick={() => navigate(`/requests-oc/reception/`, {
                         state: { ticket: record }
                     })} className='px-2'>
                         <FaEye />

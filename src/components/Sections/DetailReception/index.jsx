@@ -38,7 +38,7 @@ function DetalleRecepcion() {
         {
             title: 'Ver', key: 'detail', align: 'center', responsive: ['md'], render: (text, record) =>
                 <div className='flex justify-center gap-2'>
-                    <Button onClick={() => navigate(`/requests-oc/reception/${record.ticket}`, {
+                    <Button onClick={() => navigate(`/requests-oc/reception`, {
                         state: { ticket: record }
                     })} className='px-2'>
                         <FaEye />

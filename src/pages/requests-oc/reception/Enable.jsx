@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Switch } from 'antd'
-import { alertError } from '../../../../utils/alert'
-import RequestOC from '../../../../service/RequestOc'
+import { alertError } from '../../../utils/alert'
+import RequestOC from '../../../service/RequestOc'
 
 const Enable = ({ OC }) => {
 

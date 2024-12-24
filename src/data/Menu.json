@@ -63,12 +63,12 @@
         "items": [
             {
                 "name": "Envió correo recepción",
-                "url": "/email-history",
+                "url": "/send-email",
                 "user": "admin"
             },
             {
                 "name": "Historial Correos",
-                "url": "/send-email",
+                "url": "/email-history",
                 "user": "admin"
             },
             {

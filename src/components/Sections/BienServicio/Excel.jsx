@@ -79,7 +79,7 @@ function Excel() {
 
 
                     <Upload  {...propsUpload} className="w-full">
-                        <Button icon={<UploadOutlined />} block>Cargar template</Button>
+                        <Button icon={<UploadOutlined />} block>Cargar archivo</Button>
                     </Upload>
 
 

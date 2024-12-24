@@ -34,7 +34,6 @@ function DetalleRecepcion() {
         { title: 'Ticket', dataIndex: 'iD_Ticket', key: 'ticket', align: 'center' },
         { title: 'OC', dataIndex: 'numero_OC', key: 'oc', align: 'center' },
         { title: 'Fecha Creación', dataIndex: 'fecha_Creacion_OC', key: 'fecha_creacion', align: 'center' },
-        { title: 'Fecha Recepcion', dataIndex: 'fecha_OC_Recepcionada', key: 'fecha_creacion', align: 'center' },
         {
             title: 'Ver', key: 'detail', align: 'center', responsive: ['md'], render: (text, record) =>
                 <div className='flex justify-center gap-2'>

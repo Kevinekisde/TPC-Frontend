@@ -57,7 +57,7 @@ function EnviarCorreo() {
         },
         { title: 'Detalle', dataIndex: 'detalle', key: 'recepcion', align: 'center' },
         {
-            title: 'Historrial',
+            title: 'Historial',
             key: 'historial',
             align: 'center',
             render: (text, record) => {

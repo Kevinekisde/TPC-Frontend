@@ -27,11 +27,8 @@ function HistorialEmail() {
         { title: 'N° OC', dataIndex: 'n_OC', key: 'oc', align: 'center' },
         { title: 'Usuario', dataIndex: 'usuario', key: 'usuario', align: 'center' },
         { title: 'Fecha Envio', dataIndex: 'fechaEnvio', key: 'fecha_envio', align: 'center' },
-        { title: 'Fecha Respuesta', dataIndex: 'fechaRespuesta', key: 'fecha_respuesta', align: 'center' },
-        { title: 'Respuesta', dataIndex: 'respuesta', key: 'respuesta', align: 'center' },
         { title: 'Proveedor', dataIndex: 'proveedor', key: 'proveedor', align: 'center' },
         { title: 'CeCo', dataIndex: 'ceco', key: 'ceco', align: 'center' },
-        { title: 'Comentarios', dataIndex: 'comentarios', key: 'comentarios', align: 'center' },
     ]
 
     const handleSearch = (e) => {
@@ -55,7 +52,7 @@ function HistorialEmail() {
                         title: 'Contabilidad',
                     },
                     {
-                        title: 'Historial Correos',
+                        title: 'Envio Correo Recepcion',
                     }
                 ]}
 

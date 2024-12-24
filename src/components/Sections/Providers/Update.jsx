@@ -36,6 +36,7 @@ const Update = ({ proveedor, refetch }) => {
                 })
 
         } catch (error) {
+            console.log(error)
             alertError({ message: error.message })
         }
         setModal(false)

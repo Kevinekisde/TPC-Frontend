@@ -8,17 +8,21 @@ function Actions({ user, refetch }) {
 
     const dataUser = useAuthContext()
 
-    console.log(dataUser)
-    console.log(user)
+
+    console.log(dataUser.user.isAdmin)
 
     return (
         <div className='flex items-center justify-center gap-2'>
             {
-                dataUser.isAdmin || dataUser.user.id_Usuario == user.id_Usuario &&
+                dataUser.user.id_Usuario == user.id_Usuario && dataUser.user.isAdmin == false &&
                 <Edit user={user} refetch={refetch} />
             }
             {
-                dataUser.isAdmin &&
+                dataUser.user.isAdmin == true &&
+                <Edit user={user} refetch={refetch} />
+            }
+            {
+                dataUser.user.isAdmin == true &&
                 <Delete user={user} refetch={refetch} />
 
             }
